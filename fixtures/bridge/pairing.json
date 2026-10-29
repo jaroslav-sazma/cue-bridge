@@ -1,0 +1,409 @@
+{
+  "labels": {
+    "transcript": "app.cue.bridge/pair/v1",
+    "kBle": "app.cue.bridge/kble/v1",
+    "sas": "app.cue.bridge/sas/v1",
+    "confirm": "app.cue.bridge/confirm/v1",
+    "commit": "app.cue.bridge/commit/v1"
+  },
+  "certificates": [
+    {
+      "name": "mac",
+      "der": "308201993082013fa003020102021439c71c1bd1f5b2dfc2da18f9a10d2385aa67b4f4300a06082a8648ce3d0403023021311f301d06035504030c164375653a20627269646765207465737420286d6163293020170d3236313031323230343132325a180f32313236303931383230343132325a3021311f301d06035504030c164375653a20627269646765207465737420286d6163293059301306072a8648ce3d020106082a8648ce3d030107034200046d181616699c6012709e8c9c9933706b27537b7b42d93058ae41946caf75e65581e97aaf2c99954b2271a32803455100d8613e96480ec7911ced2af665b681a5a3533051301d0603551d0e041604140e85fb10749f08972c865a654cf7d1d11d5b772b301f0603551d230418301680140e85fb10749f08972c865a654cf7d1d11d5b772b300f0603551d130101ff040530030101ff300a06082a8648ce3d040302034800304502204d101ca33b5ef3cacf8983a415ea70e3797d5d3511cb56bb30b4e348e4d94af8022100ef1fcc8a4853f18d78c8047fb8444a28a2d001fc9330bf95acd10ce72e0ec57e",
+      "fingerprint": "f3949472bc16f7c5cb51fbb0e1702e5ed5e40ecf065e6e6ec89d4bfcc82243cb"
+    },
+    {
+      "name": "phone",
+      "der": "3082019d30820143a00302010202143e0d863608fb7c11d65d54c005bd1fec4f8e5dc5300a06082a8648ce3d04030230233121301f06035504030c184375653a206272696467652074657374202870686f6e65293020170d3236313031323230343132325a180f32313236303931383230343132325a30233121301f06035504030c184375653a206272696467652074657374202870686f6e65293059301306072a8648ce3d020106082a8648ce3d03010703420004bae60ddb5b8d6977eb9edb4861fdad0b126baf5a0673ade0ec382e4974f7cbee1ecdad1bc348ff8dfca315f9fc5edc9e31d656a9dcdcb9997b982bba67fad3aba3533051301d0603551d0e04160414363c4af57cae578529e931460a93cb77911f2a95301f0603551d23041830168014363c4af57cae578529e931460a93cb77911f2a95300f0603551d130101ff040530030101ff300a06082a8648ce3d0403020348003045022052abf9f97e39da8c23a1ba3e9abcc818d2d4f31df75846aff8539e15a5494084022100b4704278ad5e9626578b2ade6defc6e50c5ca3835c955ca61fff31ef8f243d09",
+      "fingerprint": "e17c164ad24f2828ac982267ebee8e4f82afc77d43eda20cff8b23ecd971e256"
+    }
+  ],
+  "cases": [
+    {
+      "name": "RFC 7748 §6.1 keys (Mac = Alice, phone = Bob), fingerprints of the two test certificates",
+      "macPrivateKey": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+      "macPublicKey": "8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a",
+      "macPublicKeyBase64": "hSDwCYkwp1R0i33ctD73Wg2/Og0mOBr066SpjqqbTmo=",
+      "phonePrivateKey": "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb",
+      "phonePublicKey": "de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "phonePublicKeyBase64": "3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=",
+      "macFingerprint": "f3949472bc16f7c5cb51fbb0e1702e5ed5e40ecf065e6e6ec89d4bfcc82243cb",
+      "phoneFingerprint": "e17c164ad24f2828ac982267ebee8e4f82afc77d43eda20cff8b23ecd971e256",
+      "sharedSecret": "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742",
+      "transcript": "00166170702e6375652e6272696467652f706169722f76310020f3949472bc16f7c5cb51fbb0e1702e5ed5e40ecf065e6e6ec89d4bfcc82243cb0020e17c164ad24f2828ac982267ebee8e4f82afc77d43eda20cff8b23ecd971e25600208520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a0020de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "transcriptHash": "c15abbb2351ff7fdab5d2589e02ac446597e0e669bd27a3101dc88d577d1b812",
+      "kBle": "988ac48f8611920e955e0f7c697c3972425d4d21a4f06e4a02ecde41b4259b22",
+      "sasOkm": "6d578ffe",
+      "sas": "455038",
+      "confirmKey": "a6cbdf115b11c0e737a80b62af2ec29459b12bf7999b5e7e6627cf00cdb35e2a",
+      "proofPhone": "0efa409a591773f940352d63970c93c2917c55f48895020f3c0ebd4e464f13b1",
+      "proofMac": "474a8de91c2f2c0dced76763af048b1811618648b854477f748553cb93005b2b",
+      "commitInput": "00186170702e6375652e6272696467652f636f6d6d69742f76310020de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "commit": "1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5"
+    },
+    {
+      "name": "the same keys with the two fingerprints swapped: roles are part of the transcript",
+      "macPrivateKey": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+      "macPublicKey": "8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a",
+      "macPublicKeyBase64": "hSDwCYkwp1R0i33ctD73Wg2/Og0mOBr066SpjqqbTmo=",
+      "phonePrivateKey": "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb",
+      "phonePublicKey": "de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "phonePublicKeyBase64": "3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=",
+      "macFingerprint": "e17c164ad24f2828ac982267ebee8e4f82afc77d43eda20cff8b23ecd971e256",
+      "phoneFingerprint": "f3949472bc16f7c5cb51fbb0e1702e5ed5e40ecf065e6e6ec89d4bfcc82243cb",
+      "sharedSecret": "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742",
+      "transcript": "00166170702e6375652e6272696467652f706169722f76310020e17c164ad24f2828ac982267ebee8e4f82afc77d43eda20cff8b23ecd971e2560020f3949472bc16f7c5cb51fbb0e1702e5ed5e40ecf065e6e6ec89d4bfcc82243cb00208520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a0020de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "transcriptHash": "b79c8abfaa466ce5851d54129303f3d4c7c022a96889d9acc84c8b8f5d0a7c32",
+      "kBle": "1c9615b4a072bf515162057483e509bd36603c6911aa1d43847778e1cfac68c9",
+      "sasOkm": "df7f2185",
+      "sas": "650821",
+      "confirmKey": "4c227649645097c45b1267d42df03d2aba2483106753052b0d7fc7fa8a1c0075",
+      "proofPhone": "b4d7da0cff2bc38eb3f39fd2b1bf5609e7ceff222a12d8c1c5bd138a14cf2798",
+      "proofMac": "dd5f0134f11641d46578ab6a21da7e0c033899f39fd77ee2b2a37ec5ea2e5d72",
+      "commitInput": "00186170702e6375652e6272696467652f636f6d6d69742f76310020de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "commit": "1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5"
+    },
+    {
+      "name": "derived test keys whose SAS has a leading zero (seed index 14)",
+      "macPrivateKey": "e617e4ba13de637e178d732943ddce55b4342aabf0ba05bd1d77bbb3cb3394fb",
+      "macPublicKey": "86add3bf0b18276fe4ecc5010143f2286041b7e835dd2da8ad2c10ae9c2e8a14",
+      "macPublicKeyBase64": "hq3TvwsYJ2/k7MUBAUPyKGBBt+g13S2orSwQrpwuihQ=",
+      "phonePrivateKey": "c7dd57af476250dcea1894c19bca4c686ba61f80fcda77c7404b3fe20db041c2",
+      "phonePublicKey": "8a52d63e445f7d587ac7aeeda7b371e91dfa468f3d87cda1e2bd02d6c6b9585f",
+      "phonePublicKeyBase64": "ilLWPkRffVh6x67tp7Nx6R36Ro89h82h4r0C1sa5WF8=",
+      "macFingerprint": "34d5d849aa107a8929b95bf377b9f9f29196f5bca06b778d5cd2eaaf1041ed7d",
+      "phoneFingerprint": "8cfb19a7808aa212113f019a7b9eca222f001be869eb08be939b077923e65ddc",
+      "sharedSecret": "e5be08cc816b34e4c4697009d9b3839cd555121e9fb2fc5541a6eeb9b3835c4a",
+      "transcript": "00166170702e6375652e6272696467652f706169722f7631002034d5d849aa107a8929b95bf377b9f9f29196f5bca06b778d5cd2eaaf1041ed7d00208cfb19a7808aa212113f019a7b9eca222f001be869eb08be939b077923e65ddc002086add3bf0b18276fe4ecc5010143f2286041b7e835dd2da8ad2c10ae9c2e8a1400208a52d63e445f7d587ac7aeeda7b371e91dfa468f3d87cda1e2bd02d6c6b9585f",
+      "transcriptHash": "86d8468e7d6c69e62b35baab11a471ff2bec51b01bc028ca873323c9b97c8059",
+      "kBle": "e4e23ac0f5f8db790d0f8512e952e680dd6ecf7e74b6840ba413b63c7c4fd8ce",
+      "sasOkm": "2f723238",
+      "sas": "013112",
+      "confirmKey": "3edc959a2456922007b89967f0c529f60aa1ec23f629c8c1554916f2231a3274",
+      "proofPhone": "b17867d74a79a4a67e07ff19f72042092463fb870ceab7123c397a2e77206a1a",
+      "proofMac": "3737065739f25000b46342cc31fff4a01b81d06398d67e62add1f2084a5b805b",
+      "commitInput": "00186170702e6375652e6272696467652f636f6d6d69742f763100208a52d63e445f7d587ac7aeeda7b371e91dfa468f3d87cda1e2bd02d6c6b9585f",
+      "commit": "7aea372c45a3fd8e71f735eef2a319800ac5e8ce79c88df035bd88484bd101a4"
+    }
+  ],
+  "lowOrderPublicKeys": [
+    {
+      "name": "u = 0 (order 4)",
+      "publicKey": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expect": "zero-shared-secret"
+    },
+    {
+      "name": "u = 1 (order 1)",
+      "publicKey": "0100000000000000000000000000000000000000000000000000000000000000",
+      "expect": "zero-shared-secret"
+    },
+    {
+      "name": "a point of order 8",
+      "publicKey": "e0eb7a7c3b41b8ae1656e3faf19fc46ada098deb9c32b1fd866205165f49b800",
+      "expect": "zero-shared-secret"
+    },
+    {
+      "name": "the other point of order 8",
+      "publicKey": "5f9c95bca3508c24b1d0b1559c83ef5b04445cc4581c8e86d8224eddd09f1157",
+      "expect": "zero-shared-secret"
+    },
+    {
+      "name": "u = p - 1 (order 2)",
+      "publicKey": "ecffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f",
+      "expect": "zero-shared-secret"
+    },
+    {
+      "name": "u = p, a non-canonical 0",
+      "publicKey": "edffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f",
+      "expect": "zero-shared-secret"
+    },
+    {
+      "name": "u = p + 1, a non-canonical 1",
+      "publicKey": "eeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff7f",
+      "expect": "zero-shared-secret"
+    }
+  ],
+  "commitChecks": [
+    {
+      "name": "the key the commitment was made to",
+      "commit": "1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5",
+      "revealedKey": "3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=",
+      "expect": "valid"
+    },
+    {
+      "name": "the third case's key and commitment",
+      "commit": "7aea372c45a3fd8e71f735eef2a319800ac5e8ce79c88df035bd88484bd101a4",
+      "revealedKey": "ilLWPkRffVh6x67tp7Nx6R36Ro89h82h4r0C1sa5WF8=",
+      "expect": "valid"
+    },
+    {
+      "name": "another key than the one committed to",
+      "commit": "1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5",
+      "revealedKey": "ilLWPkRffVh6x67tp7Nx6R36Ro89h82h4r0C1sa5WF8=",
+      "expect": "mismatch"
+    },
+    {
+      "name": "the Mac's own key reflected",
+      "commit": "1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5",
+      "revealedKey": "hSDwCYkwp1R0i33ctD73Wg2/Og0mOBr066SpjqqbTmo=",
+      "expect": "mismatch"
+    },
+    {
+      "name": "a commitment with its last bit flipped",
+      "commit": "1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae4",
+      "revealedKey": "3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=",
+      "expect": "mismatch"
+    },
+    {
+      "name": "SHA-256 of the bare key, without the label and lengths",
+      "commit": "f35e5616160a30bf3c6e79fa73c576d40205e8fc3ba4e1c6dcf93e6b98e857b4",
+      "revealedKey": "3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=",
+      "expect": "mismatch"
+    },
+    {
+      "name": "a commitment under the transcript label",
+      "commit": "1a73b9bd2e239d874e37c853d2690201e39368888305a89b89309459bae4c11d",
+      "revealedKey": "3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=",
+      "expect": "mismatch"
+    },
+    {
+      "name": "a commitment in uppercase hex",
+      "commit": "1C2112FB9A375D8ECBE70B69ACFBBC2ACE06E2F5872832AA2C6261E00CA8BAE5",
+      "revealedKey": "3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=",
+      "expect": "invalid"
+    },
+    {
+      "name": "a commitment one byte short",
+      "commit": "1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8ba",
+      "revealedKey": "3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=",
+      "expect": "invalid"
+    },
+    {
+      "name": "a commitment in base64",
+      "commit": "HCES+5o3XY7L5wtprPu8Ks4G4vWHKDKqLGJh4AyouuU=",
+      "revealedKey": "3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=",
+      "expect": "invalid"
+    },
+    {
+      "name": "a revealed key that is not 32 bytes",
+      "commit": "1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5",
+      "revealedKey": "3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IKw==",
+      "expect": "invalid"
+    },
+    {
+      "name": "a revealed key that is not base64",
+      "commit": "1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5",
+      "revealedKey": "not base64!",
+      "expect": "invalid"
+    }
+  ],
+  "ceremonies": [
+    {
+      "name": "the first case committed, the phone confirming right after its reveal and the Mac once its user has typed the code",
+      "case": "RFC 7748 §6.1 keys (Mac = Alice, phone = Bob), fingerprints of the two test certificates",
+      "messages": [
+        {
+          "from": "phone",
+          "body": "{\"type\":\"hello\",\"v\":1}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"hello\",\"v\":1}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-request\",\"commit\":\"1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5\"}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"pair-response\",\"pk\":\"hSDwCYkwp1R0i33ctD73Wg2/Og0mOBr066SpjqqbTmo=\"}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-reveal\",\"pk\":\"3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=\"}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-confirm\",\"proof\":\"0efa409a591773f940352d63970c93c2917c55f48895020f3c0ebd4e464f13b1\"}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"pair-confirm\",\"proof\":\"474a8de91c2f2c0dced76763af048b1811618648b854477f748553cb93005b2b\"}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"bye\"}"
+        }
+      ],
+      "checks": [
+        "phone",
+        "mac"
+      ],
+      "expect": "committed",
+      "sas": "455038",
+      "kBle": "988ac48f8611920e955e0f7c697c3972425d4d21a4f06e4a02ecde41b4259b22"
+    },
+    {
+      "name": "the third case committed, its code with a leading zero typed on the Mac",
+      "case": "derived test keys whose SAS has a leading zero (seed index 14)",
+      "messages": [
+        {
+          "from": "phone",
+          "body": "{\"type\":\"hello\",\"v\":1}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"hello\",\"v\":1}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-request\",\"commit\":\"7aea372c45a3fd8e71f735eef2a319800ac5e8ce79c88df035bd88484bd101a4\"}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"pair-response\",\"pk\":\"hq3TvwsYJ2/k7MUBAUPyKGBBt+g13S2orSwQrpwuihQ=\"}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-reveal\",\"pk\":\"ilLWPkRffVh6x67tp7Nx6R36Ro89h82h4r0C1sa5WF8=\"}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-confirm\",\"proof\":\"b17867d74a79a4a67e07ff19f72042092463fb870ceab7123c397a2e77206a1a\"}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"pair-confirm\",\"proof\":\"3737065739f25000b46342cc31fff4a01b81d06398d67e62add1f2084a5b805b\"}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"bye\"}"
+        }
+      ],
+      "checks": [
+        "phone",
+        "mac"
+      ],
+      "expect": "committed",
+      "sas": "013112",
+      "kBle": "e4e23ac0f5f8db790d0f8512e952e680dd6ecf7e74b6840ba413b63c7c4fd8ce"
+    },
+    {
+      "name": "a reveal of another key than the committed one",
+      "case": "RFC 7748 §6.1 keys (Mac = Alice, phone = Bob), fingerprints of the two test certificates",
+      "messages": [
+        {
+          "from": "phone",
+          "body": "{\"type\":\"hello\",\"v\":1}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"hello\",\"v\":1}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-request\",\"commit\":\"1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5\"}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"pair-response\",\"pk\":\"hSDwCYkwp1R0i33ctD73Wg2/Og0mOBr066SpjqqbTmo=\"}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-reveal\",\"pk\":\"ilLWPkRffVh6x67tp7Nx6R36Ro89h82h4r0C1sa5WF8=\"}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"pair-abort\",\"reason\":\"protocol-error\"}"
+        }
+      ],
+      "checks": [
+        "mac"
+      ],
+      "expect": "aborted"
+    },
+    {
+      "name": "a Mac whose key is of low order",
+      "case": "RFC 7748 §6.1 keys (Mac = Alice, phone = Bob), fingerprints of the two test certificates",
+      "messages": [
+        {
+          "from": "phone",
+          "body": "{\"type\":\"hello\",\"v\":1}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"hello\",\"v\":1}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-request\",\"commit\":\"1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5\"}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"pair-response\",\"pk\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\"}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-abort\",\"reason\":\"protocol-error\"}"
+        }
+      ],
+      "checks": [
+        "phone"
+      ],
+      "expect": "aborted"
+    },
+    {
+      "name": "a second pairing connection while the Mac is busy with the first",
+      "case": "RFC 7748 §6.1 keys (Mac = Alice, phone = Bob), fingerprints of the two test certificates",
+      "messages": [
+        {
+          "from": "phone",
+          "body": "{\"type\":\"hello\",\"v\":1}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"hello\",\"v\":1}"
+        },
+        {
+          "from": "phone",
+          "body": "{\"type\":\"pair-request\",\"commit\":\"1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5\"}"
+        },
+        {
+          "from": "mac",
+          "body": "{\"type\":\"pair-abort\",\"reason\":\"busy\"}"
+        }
+      ],
+      "checks": [
+        "phone",
+        "mac"
+      ],
+      "expect": "busy"
+    }
+  ],
+  "abortReasons": [
+    {
+      "wire": "sas-mismatch",
+      "reads": "sas-mismatch"
+    },
+    {
+      "wire": "cancelled",
+      "reads": "cancelled"
+    },
+    {
+      "wire": "timeout",
+      "reads": "timeout"
+    },
+    {
+      "wire": "protocol-error",
+      "reads": "protocol-error"
+    },
+    {
+      "wire": "busy",
+      "reads": "busy"
+    },
+    {
+      "wire": "gone-fishing",
+      "reads": "cancelled"
+    }
+  ]
+}

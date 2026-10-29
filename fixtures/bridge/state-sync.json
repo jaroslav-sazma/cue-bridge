@@ -1,0 +1,670 @@
+{
+  "renderedFields": [
+    "appLabel",
+    "title",
+    "text",
+    "threadId",
+    "iconHash",
+    "canReply"
+  ],
+  "cases": [
+    {
+      "name": "empty mirror and empty set",
+      "mirror": [],
+      "activeSet": [],
+      "expect": {
+        "added": [],
+        "updated": [],
+        "removed": [],
+        "untouched": []
+      }
+    },
+    {
+      "name": "the first sync adds everything",
+      "mirror": [],
+      "activeSet": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        },
+        {
+          "key": "0|com.example.news|1|null|10200",
+          "pkg": "com.example.news",
+          "appLabel": "Example News",
+          "title": "",
+          "text": "Morning briefing",
+          "when": 1791820920000,
+          "canReply": false,
+          "isClearable": true
+        }
+      ],
+      "expect": {
+        "added": [
+          "0|com.example.chat|42|null|10123",
+          "0|com.example.mail|7|null|10140",
+          "0|com.example.news|1|null|10200"
+        ],
+        "updated": [],
+        "removed": [],
+        "untouched": []
+      }
+    },
+    {
+      "name": "unchanged content stays untouched, a new when included",
+      "mirror": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        }
+      ],
+      "activeSet": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791821400000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        }
+      ],
+      "expect": {
+        "added": [],
+        "updated": [],
+        "removed": [],
+        "untouched": [
+          "0|com.example.chat|42|null|10123",
+          "0|com.example.mail|7|null|10140"
+        ]
+      }
+    },
+    {
+      "name": "a text change updates in place",
+      "mirror": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        }
+      ],
+      "activeSet": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Running late, start without me",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        }
+      ],
+      "expect": {
+        "added": [],
+        "updated": [
+          "0|com.example.chat|42|null|10123"
+        ],
+        "removed": [],
+        "untouched": []
+      }
+    },
+    {
+      "name": "a title, app label, thread or reply change updates in place",
+      "mirror": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        },
+        {
+          "key": "0|com.example.news|1|null|10200",
+          "pkg": "com.example.news",
+          "appLabel": "Example News",
+          "title": "",
+          "text": "Morning briefing",
+          "when": 1791820920000,
+          "canReply": false,
+          "isClearable": true
+        },
+        {
+          "key": "0|com.example.chat|43|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Bob",
+          "text": "Lunch?",
+          "when": 1791820980000,
+          "threadId": "com.example.chat/bob",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        }
+      ],
+      "activeSet": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice Smith",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        },
+        {
+          "key": "0|com.example.news|1|null|10200",
+          "pkg": "com.example.news",
+          "appLabel": "Example News",
+          "title": "",
+          "text": "Morning briefing",
+          "when": 1791820920000,
+          "canReply": false,
+          "isClearable": true,
+          "threadId": "com.example.news/briefing"
+        },
+        {
+          "key": "0|com.example.chat|43|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Bob",
+          "text": "Lunch?",
+          "when": 1791820980000,
+          "threadId": "com.example.chat/bob",
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        }
+      ],
+      "expect": {
+        "added": [],
+        "updated": [
+          "0|com.example.chat|42|null|10123",
+          "0|com.example.mail|7|null|10140",
+          "0|com.example.news|1|null|10200",
+          "0|com.example.chat|43|null|10123"
+        ],
+        "removed": [],
+        "untouched": []
+      }
+    },
+    {
+      "name": "an icon hash change, removal or addition updates in place",
+      "mirror": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        },
+        {
+          "key": "0|com.example.news|1|null|10200",
+          "pkg": "com.example.news",
+          "appLabel": "Example News",
+          "title": "",
+          "text": "Morning briefing",
+          "when": 1791820920000,
+          "canReply": false,
+          "isClearable": true
+        }
+      ],
+      "activeSet": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true
+        },
+        {
+          "key": "0|com.example.news|1|null|10200",
+          "pkg": "com.example.news",
+          "appLabel": "Example News",
+          "title": "",
+          "text": "Morning briefing",
+          "when": 1791820920000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        }
+      ],
+      "expect": {
+        "added": [],
+        "updated": [
+          "0|com.example.chat|42|null|10123",
+          "0|com.example.mail|7|null|10140",
+          "0|com.example.news|1|null|10200"
+        ],
+        "removed": [],
+        "untouched": []
+      }
+    },
+    {
+      "name": "a key missing from the set is removed",
+      "mirror": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        }
+      ],
+      "activeSet": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        }
+      ],
+      "expect": {
+        "added": [],
+        "updated": [],
+        "removed": [
+          "0|com.example.mail|7|null|10140"
+        ],
+        "untouched": [
+          "0|com.example.chat|42|null|10123"
+        ]
+      }
+    },
+    {
+      "name": "an empty set removes everything",
+      "mirror": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        },
+        {
+          "key": "0|com.example.news|1|null|10200",
+          "pkg": "com.example.news",
+          "appLabel": "Example News",
+          "title": "",
+          "text": "Morning briefing",
+          "when": 1791820920000,
+          "canReply": false,
+          "isClearable": true
+        }
+      ],
+      "activeSet": [],
+      "expect": {
+        "added": [],
+        "updated": [],
+        "removed": [
+          "0|com.example.chat|42|null|10123",
+          "0|com.example.mail|7|null|10140",
+          "0|com.example.news|1|null|10200"
+        ],
+        "untouched": []
+      }
+    },
+    {
+      "name": "additions, updates, removals and untouched together",
+      "mirror": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        },
+        {
+          "key": "0|com.example.news|1|null|10200",
+          "pkg": "com.example.news",
+          "appLabel": "Example News",
+          "title": "",
+          "text": "Morning briefing",
+          "when": 1791820920000,
+          "canReply": false,
+          "isClearable": true
+        }
+      ],
+      "activeSet": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is overdue.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        },
+        {
+          "key": "0|com.example.chat|43|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Bob",
+          "text": "Lunch?",
+          "when": 1791820980000,
+          "threadId": "com.example.chat/bob",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        }
+      ],
+      "expect": {
+        "added": [
+          "0|com.example.chat|43|null|10123"
+        ],
+        "updated": [
+          "0|com.example.mail|7|null|10140"
+        ],
+        "removed": [
+          "0|com.example.news|1|null|10200"
+        ],
+        "untouched": [
+          "0|com.example.chat|42|null|10123"
+        ]
+      }
+    },
+    {
+      "name": "a null threadId equals an absent one",
+      "mirror": [
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6",
+          "threadId": null
+        }
+      ],
+      "activeSet": [
+        {
+          "key": "0|com.example.mail|7|null|10140",
+          "pkg": "com.example.mail",
+          "appLabel": "Example Mail",
+          "title": "Invoice 2026-10",
+          "text": "Your invoice is ready.",
+          "when": 1791820860000,
+          "canReply": false,
+          "isClearable": true,
+          "iconHash": "4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6"
+        }
+      ],
+      "expect": {
+        "added": [],
+        "updated": [],
+        "removed": [],
+        "untouched": [
+          "0|com.example.mail|7|null|10140"
+        ]
+      }
+    },
+    {
+      "name": "a key repeated in the set counts once, with its last content",
+      "mirror": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        }
+      ],
+      "activeSet": [
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "An older version",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.chat|42|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Alice",
+          "text": "Are you coming?",
+          "when": 1791820800000,
+          "threadId": "com.example.chat/alice",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.chat|43|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Bob",
+          "text": "Lunch?",
+          "when": 1791820980000,
+          "threadId": "com.example.chat/bob",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        },
+        {
+          "key": "0|com.example.chat|43|null|10123",
+          "pkg": "com.example.chat",
+          "appLabel": "Example Chat",
+          "title": "Bob",
+          "text": "Lunch at noon?",
+          "when": 1791820980000,
+          "threadId": "com.example.chat/bob",
+          "canReply": true,
+          "isClearable": true,
+          "iconHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874"
+        }
+      ],
+      "expect": {
+        "added": [
+          "0|com.example.chat|43|null|10123"
+        ],
+        "updated": [],
+        "removed": [],
+        "untouched": [
+          "0|com.example.chat|42|null|10123"
+        ]
+      }
+    }
+  ]
+}

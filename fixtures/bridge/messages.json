@@ -1,0 +1,548 @@
+{
+  "bridgeProtocolVersion": 1,
+  "maxBodyBytes": 1048576,
+  "maxBinaryBytes": 1048576,
+  "examples": [
+    {
+      "type": "hello",
+      "body": "{\"type\":\"hello\",\"v\":1}",
+      "frame": "000000167b2274797065223a2268656c6c6f222c2276223a317d"
+    },
+    {
+      "type": "hello",
+      "body": "{\"type\":\"hello\",\"v\":1,\"clipboardFromMac\":false}",
+      "frame": "0000002f7b2274797065223a2268656c6c6f222c2276223a312c22636c6970626f61726446726f6d4d6163223a66616c73657d"
+    },
+    {
+      "type": "bye",
+      "body": "{\"type\":\"bye\",\"reason\":\"version-mismatch\"}",
+      "frame": "0000002a7b2274797065223a22627965222c22726561736f6e223a2276657273696f6e2d6d69736d61746368227d"
+    },
+    {
+      "type": "pair-request",
+      "body": "{\"type\":\"pair-request\",\"commit\":\"1c2112fb9a375d8ecbe70b69acfbbc2ace06e2f5872832aa2c6261e00ca8bae5\"}",
+      "frame": "000000637b2274797065223a22706169722d72657175657374222c22636f6d6d6974223a2231633231313266623961333735643865636265373062363961636662626332616365303665326635383732383332616132633632363165303063613862616535227d"
+    },
+    {
+      "type": "pair-response",
+      "body": "{\"type\":\"pair-response\",\"pk\":\"hSDwCYkwp1R0i33ctD73Wg2/Og0mOBr066SpjqqbTmo=\"}",
+      "frame": "0000004c7b2274797065223a22706169722d726573706f6e7365222c22706b223a226853447743596b777031523069333363744437335767322f4f67306d4f427230363653706a717162546d6f3d227d"
+    },
+    {
+      "type": "pair-reveal",
+      "body": "{\"type\":\"pair-reveal\",\"pk\":\"3p7bfXt9wbTTW2HC7OQ1Nz+DQ8hbeGdNrfx+FG+IK08=\"}",
+      "frame": "0000004a7b2274797065223a22706169722d72657665616c222c22706b223a2233703762665874397762545457324843374f51314e7a2b44513868626547644e7266782b46472b494b30383d227d"
+    },
+    {
+      "type": "pair-confirm",
+      "body": "{\"type\":\"pair-confirm\",\"proof\":\"0efa409a591773f940352d63970c93c2917c55f48895020f3c0ebd4e464f13b1\"}",
+      "frame": "000000627b2274797065223a22706169722d636f6e6669726d222c2270726f6f66223a2230656661343039613539313737336639343033353264363339373063393363323931376335356634383839353032306633633065626434653436346631336231227d"
+    },
+    {
+      "type": "pair-abort",
+      "body": "{\"type\":\"pair-abort\",\"reason\":\"sas-mismatch\"}",
+      "frame": "0000002d7b2274797065223a22706169722d61626f7274222c22726561736f6e223a227361732d6d69736d61746368227d"
+    },
+    {
+      "type": "signal",
+      "body": "{\"type\":\"signal\",\"frame\":\"AQAAAABlr37dEwYCZtX/IZjX87brvV6tepbYXze0IABOowhurpRJaC7xPVMp\"}",
+      "frame": "000000587b2274797065223a227369676e616c222c226672616d65223a22415141414141426c72333764457759435a74582f495a6a58383762727656367465706259587a65304941424f6f7768757270524a6143377850564d70227d"
+    },
+    {
+      "type": "sync-request",
+      "body": "{\"type\":\"sync-request\"}",
+      "frame": "000000177b2274797065223a2273796e632d72657175657374227d"
+    },
+    {
+      "type": "active-set",
+      "body": "{\"type\":\"active-set\",\"notifications\":[{\"key\":\"0|com.example.chat|42|null|10123\",\"pkg\":\"com.example.chat\",\"appLabel\":\"Example Chat\",\"title\":\"Alice\",\"text\":\"Are you coming?\",\"when\":1791820800000,\"threadId\":\"com.example.chat/alice\",\"canReply\":true,\"isClearable\":true,\"iconHash\":\"c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874\"},{\"key\":\"0|com.example.mail|7|null|10123\",\"pkg\":\"com.example.mail\",\"appLabel\":\"Mail\",\"title\":\"Invoice\",\"text\":\"\",\"when\":1791820800000,\"canReply\":false,\"isClearable\":true}]}",
+      "frame": "000002027b2274797065223a226163746976652d736574222c226e6f74696669636174696f6e73223a5b7b226b6579223a22307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233222c22706b67223a22636f6d2e6578616d706c652e63686174222c226170704c6162656c223a224578616d706c652043686174222c227469746c65223a22416c696365222c2274657874223a2241726520796f7520636f6d696e673f222c227768656e223a313739313832303830303030302c227468726561644964223a22636f6d2e6578616d706c652e636861742f616c696365222c2263616e5265706c79223a747275652c226973436c65617261626c65223a747275652c2269636f6e48617368223a2263326434623434366134346365353466616238653031313530653234646432346633643835306337633134646366653331663633323133343164643836383734227d2c7b226b6579223a22307c636f6d2e6578616d706c652e6d61696c7c377c6e756c6c7c3130313233222c22706b67223a22636f6d2e6578616d706c652e6d61696c222c226170704c6162656c223a224d61696c222c227469746c65223a22496e766f696365222c2274657874223a22222c227768656e223a313739313832303830303030302c2263616e5265706c79223a66616c73652c226973436c65617261626c65223a747275657d5d7d"
+    },
+    {
+      "type": "active-set",
+      "body": "{\"type\":\"active-set\",\"notifications\":[{\"key\":\"0|com.example.chat|42|null|10123\",\"pkg\":\"com.example.chat\",\"appLabel\":\"Example Chat\",\"title\":\"Alice\",\"text\":\"Are you coming?\",\"when\":1791820800000,\"threadId\":\"com.example.chat/alice\",\"canReply\":true,\"isClearable\":true,\"r\":1791820860000}]}",
+      "frame": "0000011c7b2274797065223a226163746976652d736574222c226e6f74696669636174696f6e73223a5b7b226b6579223a22307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233222c22706b67223a22636f6d2e6578616d706c652e63686174222c226170704c6162656c223a224578616d706c652043686174222c227469746c65223a22416c696365222c2274657874223a2241726520796f7520636f6d696e673f222c227768656e223a313739313832303830303030302c227468726561644964223a22636f6d2e6578616d706c652e636861742f616c696365222c2263616e5265706c79223a747275652c226973436c65617261626c65223a747275652c2272223a313739313832303836303030307d5d7d"
+    },
+    {
+      "type": "notif-detail",
+      "body": "{\"type\":\"notif-detail\",\"key\":\"0|com.example.chat|42|null|10123\",\"pkg\":\"com.example.chat\",\"appLabel\":\"Example Chat\",\"title\":\"Alice\",\"text\":\"Are you coming?\",\"when\":1791820800000,\"threadId\":\"com.example.chat/alice\",\"canReply\":true,\"isClearable\":true,\"iconHash\":\"c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874\"}",
+      "frame": "000001467b2274797065223a226e6f7469662d64657461696c222c226b6579223a22307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233222c22706b67223a22636f6d2e6578616d706c652e63686174222c226170704c6162656c223a224578616d706c652043686174222c227469746c65223a22416c696365222c2274657874223a2241726520796f7520636f6d696e673f222c227768656e223a313739313832303830303030302c227468726561644964223a22636f6d2e6578616d706c652e636861742f616c696365222c2263616e5265706c79223a747275652c226973436c65617261626c65223a747275652c2269636f6e48617368223a2263326434623434366134346365353466616238653031313530653234646432346633643835306337633134646366653331663633323133343164643836383734227d"
+    },
+    {
+      "type": "notif-detail",
+      "body": "{\"type\":\"notif-detail\",\"key\":\"0|com.example.chat|42|null|10123\",\"pkg\":\"com.example.chat\",\"appLabel\":\"Example Chat\",\"title\":\"Alice\",\"text\":\"Are you coming?\",\"when\":1791820800000,\"threadId\":\"com.example.chat/alice\",\"canReply\":true,\"isClearable\":true,\"iconHash\":\"c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874\",\"r\":1791820800000}",
+      "frame": "000001587b2274797065223a226e6f7469662d64657461696c222c226b6579223a22307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233222c22706b67223a22636f6d2e6578616d706c652e63686174222c226170704c6162656c223a224578616d706c652043686174222c227469746c65223a22416c696365222c2274657874223a2241726520796f7520636f6d696e673f222c227768656e223a313739313832303830303030302c227468726561644964223a22636f6d2e6578616d706c652e636861742f616c696365222c2263616e5265706c79223a747275652c226973436c65617261626c65223a747275652c2269636f6e48617368223a2263326434623434366134346365353466616238653031313530653234646432346633643835306337633134646366653331663633323133343164643836383734222c2272223a313739313832303830303030307d"
+    },
+    {
+      "type": "icon-get",
+      "body": "{\"type\":\"icon-get\",\"hash\":\"4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6\"}",
+      "frame": "0000005d7b2274797065223a2269636f6e2d676574222c2268617368223a2234633462366133626531333134616238363133386265663433313464646530323265363030393630643836383961326338663836333138303264323064616236227d"
+    },
+    {
+      "type": "icon-data",
+      "body": "{\"type\":\"icon-data\",\"hash\":\"4c4b6a3be1314ab86138bef4314dde022e600960d8689a2c8f8631802d20dab6\",\"binaryBytes\":8}",
+      "frame": "0000006e7b2274797065223a2269636f6e2d64617461222c2268617368223a2234633462366133626531333134616238363133386265663433313464646530323265363030393630643836383961326338663836333138303264323064616236222c2262696e6172794279746573223a387d89504e470d0a1a0a",
+      "binary": "89504e470d0a1a0a"
+    },
+    {
+      "type": "clipboard-set",
+      "body": "{\"type\":\"clipboard-set\",\"text\":\"https://example.com/a?b=c\",\"sensitive\":false}",
+      "frame": "0000004d7b2274797065223a22636c6970626f6172642d736574222c2274657874223a2268747470733a2f2f6578616d706c652e636f6d2f613f623d63222c2273656e736974697665223a66616c73657d"
+    },
+    {
+      "type": "clipboard-set",
+      "body": "{\"type\":\"clipboard-set\",\"text\":\"Meeting moved to 3 pm\",\"sensitive\":false,\"announce\":true}",
+      "frame": "000000597b2274797065223a22636c6970626f6172642d736574222c2274657874223a224d656574696e67206d6f76656420746f203320706d222c2273656e736974697665223a66616c73652c22616e6e6f756e6365223a747275657d"
+    },
+    {
+      "type": "clipboard-set",
+      "body": "{\"type\":\"clipboard-set\",\"text\":\"correct horse battery staple\",\"sensitive\":true}",
+      "frame": "0000004f7b2274797065223a22636c6970626f6172642d736574222c2274657874223a22636f727265637420686f727365206261747465727920737461706c65222c2273656e736974697665223a747275657d"
+    },
+    {
+      "type": "clipboard-set",
+      "body": "{\"type\":\"clipboard-set\",\"text\":\"Notes from the call\",\"sensitive\":false,\"ageMs\":95000}",
+      "frame": "000000557b2274797065223a22636c6970626f6172642d736574222c2274657874223a224e6f7465732066726f6d207468652063616c6c222c2273656e736974697665223a66616c73652c226167654d73223a39353030307d"
+    },
+    {
+      "type": "reply-text",
+      "body": "{\"type\":\"reply-text\",\"key\":\"0|com.example.chat|42|null|10123\",\"text\":\"A reply too long for one BLE frame.\"}",
+      "frame": "0000006b7b2274797065223a227265706c792d74657874222c226b6579223a22307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233222c2274657874223a2241207265706c7920746f6f206c6f6e6720666f72206f6e6520424c45206672616d652e227d"
+    }
+  ],
+  "streams": [
+    {
+      "name": "an empty stream ends cleanly",
+      "stream": "",
+      "expect": []
+    },
+    {
+      "name": "two frames back to back",
+      "stream": "000000167b2274797065223a2268656c6c6f222c2276223a317d000000177b2274797065223a2273796e632d72657175657374227d",
+      "expect": [
+        {
+          "result": "message",
+          "type": "hello"
+        },
+        {
+          "result": "message",
+          "type": "sync-request"
+        }
+      ]
+    },
+    {
+      "name": "an unknown field is ignored",
+      "stream": "000000287b2274797065223a2268656c6c6f222c2276223a312c2263617073223a5b22667574757265225d7d",
+      "expect": [
+        {
+          "result": "message",
+          "type": "hello"
+        }
+      ]
+    },
+    {
+      "name": "an optional field may be absent",
+      "stream": "0000000e7b2274797065223a22627965227d",
+      "expect": [
+        {
+          "result": "message",
+          "type": "bye"
+        }
+      ]
+    },
+    {
+      "name": "an optional field may be null",
+      "stream": "0000001c7b2274797065223a22627965222c22726561736f6e223a6e756c6c7d",
+      "expect": [
+        {
+          "result": "message",
+          "type": "bye"
+        }
+      ]
+    },
+    {
+      "name": "an optional boolean may be null",
+      "stream": "000000457b2274797065223a22636c6970626f6172642d736574222c2274657874223a2261222c2273656e736974697665223a66616c73652c22616e6e6f756e6365223a6e756c6c7d",
+      "expect": [
+        {
+          "result": "message",
+          "type": "clipboard-set"
+        }
+      ]
+    },
+    {
+      "name": "an optional long may be null",
+      "stream": "000000427b2274797065223a22636c6970626f6172642d736574222c2274657874223a2261222c2273656e736974697665223a66616c73652c226167654d73223a6e756c6c7d",
+      "expect": [
+        {
+          "result": "message",
+          "type": "clipboard-set"
+        }
+      ]
+    },
+    {
+      "name": "an optional revision may be null",
+      "stream": "000000857b2274797065223a226e6f7469662d64657461696c222c226b6579223a226b222c22706b67223a2270222c226170704c6162656c223a2241222c227469746c65223a22222c2274657874223a22222c227768656e223a312c2263616e5265706c79223a66616c73652c226973436c65617261626c65223a747275652c2272223a6e756c6c7d",
+      "expect": [
+        {
+          "result": "message",
+          "type": "notif-detail"
+        }
+      ]
+    },
+    {
+      "name": "an optional switch may be null",
+      "stream": "0000002e7b2274797065223a2268656c6c6f222c2276223a312c22636c6970626f61726446726f6d4d6163223a6e756c6c7d",
+      "expect": [
+        {
+          "result": "message",
+          "type": "hello"
+        }
+      ]
+    },
+    {
+      "name": "null binaryBytes means no sidecar",
+      "stream": "000000297b2274797065223a2268656c6c6f222c2276223a312c2262696e6172794279746573223a6e756c6c7d000000177b2274797065223a2273796e632d72657175657374227d",
+      "expect": [
+        {
+          "result": "message",
+          "type": "hello"
+        },
+        {
+          "result": "message",
+          "type": "sync-request"
+        }
+      ]
+    },
+    {
+      "name": "an unknown type is ignored and the stream goes on",
+      "stream": "0000001d7b2274797065223a226675747572652d7468696e67222c2278223a317d000000167b2274797065223a2268656c6c6f222c2276223a317d",
+      "expect": [
+        {
+          "result": "ignore",
+          "type": "future-thing"
+        },
+        {
+          "result": "message",
+          "type": "hello"
+        }
+      ]
+    },
+    {
+      "name": "an unknown type's sidecar is skipped",
+      "stream": "000000267b2274797065223a226675747572652d626c6f62222c2262696e6172794279746573223a337d010203000000167b2274797065223a2268656c6c6f222c2276223a317d",
+      "expect": [
+        {
+          "result": "ignore",
+          "type": "future-blob"
+        },
+        {
+          "result": "message",
+          "type": "hello"
+        }
+      ]
+    },
+    {
+      "name": "a sidecar on a known type that defines none is skipped",
+      "stream": "000000457b2274797065223a22636c6970626f6172642d736574222c2274657874223a2261222c2273656e736974697665223a66616c73652c2262696e6172794279746573223a327dfffe000000167b2274797065223a2268656c6c6f222c2276223a317d",
+      "expect": [
+        {
+          "result": "message",
+          "type": "clipboard-set"
+        },
+        {
+          "result": "message",
+          "type": "hello"
+        }
+      ]
+    },
+    {
+      "name": "a missing required field",
+      "stream": "000000107b2274797065223a2268656c6c6f227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "pair-confirm without proof",
+      "stream": "000000177b2274797065223a22706169722d636f6e6669726d227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "pair-confirm with a proof that is not a string",
+      "stream": "000000217b2274797065223a22706169722d636f6e6669726d222c2270726f6f66223a317d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "pair-request without commit",
+      "stream": "000000177b2274797065223a22706169722d72657175657374227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "pair-request with the old pk instead of commit",
+      "stream": "0000004b7b2274797065223a22706169722d72657175657374222c22706b223a2233703762665874397762545457324843374f51314e7a2b44513868626547644e7266782b46472b494b30383d227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "pair-response without pk",
+      "stream": "000000187b2274797065223a22706169722d726573706f6e7365227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "pair-reveal with a pk that is not a string",
+      "stream": "0000001e7b2274797065223a22706169722d72657665616c222c22706b223a33327d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "an int sent as a string",
+      "stream": "000000187b2274797065223a2268656c6c6f222c2276223a2231227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "a boolean sent as a string",
+      "stream": "000000367b2274797065223a22636c6970626f6172642d736574222c2274657874223a2261222c2273656e736974697665223a2274727565227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "an optional boolean sent as a string",
+      "stream": "000000477b2274797065223a22636c6970626f6172642d736574222c2274657874223a2261222c2273656e736974697665223a66616c73652c22616e6e6f756e6365223a2274727565227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "an optional long sent as a string",
+      "stream": "000000457b2274797065223a22636c6970626f6172642d736574222c2274657874223a2261222c2273656e736974697665223a66616c73652c226167654d73223a223935303030227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "a revision sent as a string",
+      "stream": "000000847b2274797065223a226e6f7469662d64657461696c222c226b6579223a226b222c22706b67223a2270222c226170704c6162656c223a2241222c227469746c65223a22222c2274657874223a22222c227768656e223a312c2263616e5265706c79223a66616c73652c226973436c65617261626c65223a747275652c2272223a2231227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "a switch sent as a string",
+      "stream": "000000317b2274797065223a2268656c6c6f222c2276223a312c22636c6970626f61726446726f6d4d6163223a2266616c7365227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "a string sent as a number",
+      "stream": "0000001b7b2274797065223a227369676e616c222c226672616d65223a317d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "icon-data without binaryBytes",
+      "stream": "0000005e7b2274797065223a2269636f6e2d64617461222c2268617368223a2230303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "null for a required field",
+      "stream": "000000237b2274797065223a22706169722d61626f7274222c22726561736f6e223a6e756c6c7d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "null for a required int",
+      "stream": "000000197b2274797065223a2268656c6c6f222c2276223a6e756c6c7d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "icon-data with a null binaryBytes",
+      "stream": "000000717b2274797065223a2269636f6e2d64617461222c2268617368223a2230303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030222c2262696e6172794279746573223a6e756c6c7d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "no type",
+      "stream": "000000077b2276223a317d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "a type that is not a string",
+      "stream": "0000000a7b2274797065223a317d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "a body that is not an object",
+      "stream": "000000185b7b2274797065223a2268656c6c6f222c2276223a317d5d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "a body that is not JSON",
+      "stream": "000000107b2274797065223a2268656c6c6f222c",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "a body that is not UTF-8",
+      "stream": "0000001e7b2274797065223a2268656c6c6f222c2276223a312c2278223a22ff227d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "a zero length",
+      "stream": "00000000",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "a length over 1048576",
+      "stream": "00100001",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "the stream ends inside the length",
+      "stream": "0000",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "the stream ends inside the body",
+      "stream": "0000001e7b227479706522",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "binaryBytes of 0",
+      "stream": "000000267b2274797065223a226675747572652d626c6f62222c2262696e6172794279746573223a307d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "binaryBytes that is not a number",
+      "stream": "000000287b2274797065223a226675747572652d626c6f62222c2262696e6172794279746573223a2233227d616263",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "binaryBytes over 1048576",
+      "stream": "0000002c7b2274797065223a226675747572652d626c6f62222c2262696e6172794279746573223a313034383537377d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "the stream ends inside the sidecar",
+      "stream": "0000006e7b2274797065223a2269636f6e2d64617461222c2268617368223a2230303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030222c2262696e6172794279746573223a387d89504e",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    },
+    {
+      "name": "frames after a malformed one are never read",
+      "stream": "000000107b2274797065223a2268656c6c6f227d000000167b2274797065223a2268656c6c6f222c2276223a317d",
+      "expect": [
+        {
+          "result": "reject"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+Cue: Relay & Reply — macOS bridge for the Android launcher Cue: React & Act
+
+Copyright (C) 2026 Jaroslav Sazma
+
+SPDX-License-Identifier: GPL-3.0-or-later
+
+This program is free software: you can redistribute it and/or modify it under the terms of the
+GNU General Public License as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program (the
+file LICENSE). If not, see <https://www.gnu.org/licenses/>.
+
+
+Additional terms under section 7 of the GNU GPL version 3
+---------------------------------------------------------
+
+These terms apply only to the material authored by the copyright holder above, not to any
+third-party material listed below.
+
+(a) Under section 7(c), a modified version you convey must be marked in reasonable ways as
+    different from the original version, for example with a name of its own and a bundle
+    identifier other than app.cue.bridge, and must not be presented as the original.
+
+(b) Under section 7(e), this license grants no rights under trademark law to the names "Cue:",
+    "Cue: React & Act" and "Cue: Relay & Reply" or to the Cue: icon and logo.
+
+
+Bridge protocol test vectors
+----------------------------
+
+The test vectors in fixtures/bridge/ are a copy of those in the repository of Cue: React & Act,
+where they sit beside the protocol specification, docs/bridge-protocol.md. Neither is under the GNU
+GPL, so that anyone may implement the protocol on any platform under any license: to the extent
+possible under law, the copyright holder above has waived all copyright and related or neighboring
+rights to both under CC0 1.0 Universal (SPDX-License-Identifier: CC0-1.0; the text is in
+LICENSES/CC0-1.0.txt). The waiver grants no rights under trademark law: term (b) above still holds
+for the names and the icon.
+
+
+Third-party material
+--------------------
+
+None. The app uses only the system frameworks of macOS and redistributes no third-party code,
+assets or libraries.

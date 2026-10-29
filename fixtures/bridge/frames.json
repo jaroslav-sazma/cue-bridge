@@ -1,0 +1,651 @@
+{
+  "kBle": "988ac48f8611920e955e0f7c697c3972425d4d21a4f06e4a02ecde41b4259b22",
+  "maxFrameBytes": 180,
+  "keyHashes": [
+    {
+      "key": "0|com.example.chat|42|null|10123",
+      "hash": "54892d1f759b11f6"
+    },
+    {
+      "key": "0|com.whatsapp|1|abc@s.whatsapp.net|10234",
+      "hash": "778e7ebdc00b1b16"
+    },
+    {
+      "key": "Žluťoučký kůň",
+      "hash": "3e1fe366c7bafc49"
+    },
+    {
+      "key": "",
+      "hash": "e3b0c44298fc1c14"
+    }
+  ],
+  "vectors": [
+    {
+      "name": "notif-posted, first frame phone to Mac",
+      "direction": "phone-to-mac",
+      "seq": 0,
+      "type": 1,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\"}",
+      "nonce": "000000010000000000000000",
+      "frame": "010000000065af7edd13060266d5ff2198d7f3b6ebbd5ead7a96d85f37b420004ea3086eae9449682ef13d5329",
+      "signal": "valid"
+    },
+    {
+      "name": "notif-removed",
+      "direction": "phone-to-mac",
+      "seq": 1,
+      "type": 2,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\"}",
+      "nonce": "000000010000000000000001",
+      "frame": "0200000001815c37cb6cd8fd3c989dba2899241d9abc0a47d4ab8398989f8d6a74ddb1551fbf38f0586e86c55e",
+      "signal": "valid"
+    },
+    {
+      "name": "dismiss, first frame Mac to phone",
+      "direction": "mac-to-phone",
+      "seq": 0,
+      "type": 3,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\"}",
+      "nonce": "000000020000000000000000",
+      "frame": "03000000000c9ffbbf3696146c6ce84dbc7b227cab6e1db2c226434ff46375a15e2e95a0dc94665b414c173ede",
+      "signal": "valid"
+    },
+    {
+      "name": "reply with inline text (multi-byte UTF-8)",
+      "direction": "mac-to-phone",
+      "seq": 1,
+      "type": 4,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\",\"t\":\"On my way 👍\"}",
+      "nonce": "000000020000000000000001",
+      "frame": "04000000018ab02e7a51dd2119b15397d61fb29dad600f0a7982c41ee8dba976eaccbaf478cf6559eab503c600ccc0f1d30174bdb16306a6f24f49e3e8ae09bd7b0c",
+      "signal": "valid"
+    },
+    {
+      "name": "reply whose text follows over TCP",
+      "direction": "mac-to-phone",
+      "seq": 2,
+      "type": 4,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\",\"tcp\":true}",
+      "nonce": "000000020000000000000002",
+      "frame": "04000000025bdc2dab0260878f9c764998730024a3638614bd797f27d06b93e6c8135b48c71d7b147f05068e6ac6157158399a57f3ebb484",
+      "signal": "valid"
+    },
+    {
+      "name": "clipboard-small",
+      "direction": "mac-to-phone",
+      "seq": 3,
+      "type": 5,
+      "plaintext": "{\"t\":\"https://example.com/a?b=c\",\"s\":false}",
+      "nonce": "000000020000000000000003",
+      "frame": "0500000003da5c6c05f6f407687f760ca431e2139c8497c04c4ec99866800ad7c97754125e5e1f0e7b0d0e581fca1e63716411090070f79883d31aff973d77b5",
+      "signal": "valid"
+    },
+    {
+      "name": "clipboard-small, sensitive, largest plaintext that fits",
+      "direction": "mac-to-phone",
+      "seq": 4,
+      "type": 5,
+      "plaintext": "{\"t\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\"s\":true}",
+      "nonce": "000000020000000000000004",
+      "frame": "050000000460c039633038e31df68bf76140fab5ed681ac6a8a3f67a7c2d8cbbb139ea63e9073e36ebe8194ff77a3720863306fa01e03eded74ff607137f6559909c45c0a4fd336744d3377564d5aa6375b2f5b43302bcc29f67fe2360353d8bbc2ba784b24fae7b75a07a1ce8ea938dda5ca07c57232643491d086c5e7fb9e5ee39260c707515a15b007f62d134770566cf7cb3d4aadca6b2438ee9e1cb3426415ff50ec4bb3a4351b2a940e29efbbd83e28ac5",
+      "signal": "valid"
+    },
+    {
+      "name": "sync-request",
+      "direction": "mac-to-phone",
+      "seq": 6,
+      "type": 7,
+      "plaintext": "{}",
+      "nonce": "000000020000000000000006",
+      "frame": "0700000006cf5a512b7e26a670440a337959b370cda840",
+      "signal": "valid"
+    },
+    {
+      "name": "the last seq a direction may use",
+      "direction": "phone-to-mac",
+      "seq": 4294967295,
+      "type": 9,
+      "plaintext": "{}",
+      "nonce": "0000000100000000ffffffff",
+      "frame": "09ffffffffee7da5292ffd83a5c0f138d447828b4160d9",
+      "signal": "valid"
+    },
+    {
+      "name": "an unknown type authenticates and is ignored",
+      "direction": "mac-to-phone",
+      "seq": 7,
+      "type": 200,
+      "plaintext": "{}",
+      "nonce": "000000020000000000000007",
+      "frame": "c8000000076f82d47b021ef211c6b45d809f45388d5ef6",
+      "signal": "unknown-type"
+    },
+    {
+      "name": "a key hash that is not 16 lowercase hex digits",
+      "direction": "phone-to-mac",
+      "seq": 3,
+      "type": 1,
+      "plaintext": "{\"k\":\"ABC\"}",
+      "nonce": "000000010000000000000003",
+      "frame": "0100000003312e08e847e87a069f3214a899cd33c86183e63cb72442c35eb121",
+      "signal": "invalid"
+    },
+    {
+      "name": "a reply with both text and the tcp flag",
+      "direction": "mac-to-phone",
+      "seq": 8,
+      "type": 4,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\",\"t\":\"x\",\"tcp\":true}",
+      "nonce": "000000020000000000000008",
+      "frame": "04000000086113255165cf0b39a95c1f5a7fed6fd16e7f2a5b849c25787cdebed6f094bff58d3c575e613681e5ea27a8f6f536bc7c85fec6cb3c4c2bf982e2f1",
+      "signal": "invalid"
+    },
+    {
+      "name": "dismiss sealed phone to Mac: it authenticates, but the type is not allowed in this direction",
+      "direction": "phone-to-mac",
+      "seq": 4,
+      "type": 3,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\"}",
+      "nonce": "000000010000000000000004",
+      "frame": "0300000004c29da960c86bb307beb37c73dbb4edc5b1afaa5c4e484f743c910608a3582cd41d7f8e0898eba797",
+      "signal": "wrong-direction"
+    },
+    {
+      "name": "reply-error with a reason",
+      "direction": "phone-to-mac",
+      "seq": 5,
+      "type": 8,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\",\"r\":\"no-reply-action\"}",
+      "nonce": "000000010000000000000005",
+      "frame": "0800000005fff9b292e878bac30ed580e06a8ead6f4ed2275c79bfab98e46fdb8dc4e2880ccc8953805f6df0f02ab9fbfc0170e7ff7db0d65496bc760176d6b5d5ab1b",
+      "signal": "valid"
+    },
+    {
+      "name": "reply-error without a reason",
+      "direction": "phone-to-mac",
+      "seq": 6,
+      "type": 8,
+      "plaintext": "{\"k\":\"778e7ebdc00b1b16\"}",
+      "nonce": "000000010000000000000006",
+      "frame": "08000000069cc58e86ea825baac3e71fffc1b3d1c89adea5e8bbcefdb3ce9c3701659d6bcfefde4ccb74f3b9a7",
+      "signal": "valid"
+    },
+    {
+      "name": "reply-error with a reason this version does not define: still valid",
+      "direction": "phone-to-mac",
+      "seq": 7,
+      "type": 8,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\",\"r\":\"rate-limited\"}",
+      "nonce": "000000010000000000000007",
+      "frame": "080000000760567e9df95949afc4f90eb989ebc8faee6b07f6405b11b62813160ac6db7c70869fe1aec7367f2b35031f2d39d6de598892b8d85753f035f229ee",
+      "signal": "valid"
+    },
+    {
+      "name": "reply-error whose reason is not a string",
+      "direction": "phone-to-mac",
+      "seq": 8,
+      "type": 8,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\",\"r\":1}",
+      "nonce": "000000010000000000000008",
+      "frame": "0800000008f0c4909a734c26f1a9f9640a3d218ecf6fc6b87a4981af6aa05d82bdf7ab546892607ae76f31bebdb3218103881c",
+      "signal": "invalid"
+    },
+    {
+      "name": "reply-error sealed Mac to phone: it authenticates, but the type is not allowed in this direction",
+      "direction": "mac-to-phone",
+      "seq": 9,
+      "type": 8,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\",\"r\":\"gone\"}",
+      "nonce": "000000020000000000000009",
+      "frame": "080000000920e7dcf715503184029f87e9b0ca748d61acc518543c3191693a756aa2c3c8ab082e5c061a14ac72d6a30fe924c4e7ee1668d8",
+      "signal": "wrong-direction"
+    },
+    {
+      "name": "ping",
+      "direction": "phone-to-mac",
+      "seq": 9,
+      "type": 9,
+      "plaintext": "{}",
+      "nonce": "000000010000000000000009",
+      "frame": "0900000009cda9d2ae1774f80ad50b774568d76e65429e",
+      "signal": "valid"
+    },
+    {
+      "name": "ping, Mac to phone: the answer to a confirmed subscription",
+      "direction": "mac-to-phone",
+      "seq": 10,
+      "type": 9,
+      "plaintext": "{}",
+      "nonce": "00000002000000000000000a",
+      "frame": "090000000ac3175cd732fa4de78b13b64c3d91070fe0e6",
+      "signal": "valid"
+    },
+    {
+      "name": "clipboard-pending",
+      "direction": "mac-to-phone",
+      "seq": 11,
+      "type": 10,
+      "plaintext": "{}",
+      "nonce": "00000002000000000000000b",
+      "frame": "0a0000000bf8b7f21ab7e856744f19a98d8ddf38555607",
+      "signal": "valid"
+    },
+    {
+      "name": "clipboard-pending sealed phone to Mac: it authenticates, but the type is not allowed in this direction",
+      "direction": "phone-to-mac",
+      "seq": 10,
+      "type": 10,
+      "plaintext": "{}",
+      "nonce": "00000001000000000000000a",
+      "frame": "0a0000000a49179c15ef2c711938cf4d9eb1ecce098e37",
+      "signal": "wrong-direction"
+    },
+    {
+      "name": "dismiss with the revision of the post it closes",
+      "direction": "mac-to-phone",
+      "seq": 12,
+      "type": 3,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\",\"r\":1791820800000}",
+      "nonce": "00000002000000000000000c",
+      "frame": "030000000c342ae851cc4b8aa9fe060b96a8b2e5e548aa40d6a10f184b0285233c6e9400e483fcb1dde157790184836b288e67550f8031eda729ac3d5b7ece",
+      "signal": "valid"
+    },
+    {
+      "name": "dismiss whose revision is not a number",
+      "direction": "mac-to-phone",
+      "seq": 13,
+      "type": 3,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\",\"r\":\"1791820800000\"}",
+      "nonce": "00000002000000000000000d",
+      "frame": "030000000de5b4557d901842598423aab6a41f6a9c2698b02b7c6ea48a682a7a4fe2954007702a675d640a93ae8023402fdc310c9c6cce08212e692f7e399712f9",
+      "signal": "invalid"
+    },
+    {
+      "name": "clipboard-small with the age of a clip that waited",
+      "direction": "mac-to-phone",
+      "seq": 14,
+      "type": 5,
+      "plaintext": "{\"t\":\"Notes from the call\",\"s\":false,\"a\":95000}",
+      "nonce": "00000002000000000000000e",
+      "frame": "050000000e5da63d3400536f6faeb0f94ee91347b2369f27e08fb6743f479a9c22afbcca6c3be1eeb4cc7a8eb4ec82341d691a73f2d6136e910b7d2245b4a2a111bdc943",
+      "signal": "valid"
+    },
+    {
+      "name": "clipboard-small whose age is not a number",
+      "direction": "mac-to-phone",
+      "seq": 15,
+      "type": 5,
+      "plaintext": "{\"t\":\"x\",\"s\":false,\"a\":\"95000\"}",
+      "nonce": "00000002000000000000000f",
+      "frame": "050000000f734c99011e9dc466b7025de6b5ed801f150422129970a535ac9053d08f57affc6fcff873692600164b011e1186210b",
+      "signal": "invalid"
+    },
+    {
+      "name": "reply-ok",
+      "direction": "phone-to-mac",
+      "seq": 11,
+      "type": 11,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\"}",
+      "nonce": "00000001000000000000000b",
+      "frame": "0b0000000b07333a01e21230794baa277c05c913fbf954876f9f2a3923641d2673c08ca42975304bd79941d335",
+      "signal": "valid"
+    },
+    {
+      "name": "reply-ok with a key hash that is not 16 lowercase hex digits",
+      "direction": "phone-to-mac",
+      "seq": 12,
+      "type": 11,
+      "plaintext": "{\"k\":\"54892D1F759B11F6\"}",
+      "nonce": "00000001000000000000000c",
+      "frame": "0b0000000c218dc18519a040608c43f15daba1dafaef3fc7c43f8c5fdfe966e2d393abfdd77faa9b76ecaee4a2",
+      "signal": "invalid"
+    },
+    {
+      "name": "reply-ok sealed Mac to phone: it authenticates, but the type is not allowed in this direction",
+      "direction": "mac-to-phone",
+      "seq": 16,
+      "type": 11,
+      "plaintext": "{\"k\":\"54892d1f759b11f6\"}",
+      "nonce": "000000020000000000000010",
+      "frame": "0b0000001064f313aa0e7eaf5d9c4faebb89305a278a3f7ad2728bec64a2cdd7db26052bb636752272383c5e7b",
+      "signal": "wrong-direction"
+    },
+    {
+      "name": "lock-state, the Mac's screen is locked",
+      "direction": "mac-to-phone",
+      "seq": 17,
+      "type": 12,
+      "plaintext": "{\"l\":true}",
+      "nonce": "000000020000000000000011",
+      "frame": "0c00000011d033828449f399952550a880f0eb42ad17941dd34da8da543a1e",
+      "signal": "valid"
+    },
+    {
+      "name": "lock-state, the Mac's screen is unlocked",
+      "direction": "mac-to-phone",
+      "seq": 18,
+      "type": 12,
+      "plaintext": "{\"l\":false}",
+      "nonce": "000000020000000000000012",
+      "frame": "0c000000120a344f95e1d53685a35215bfe05e4a481c904b60e62005e29c878e",
+      "signal": "valid"
+    },
+    {
+      "name": "lock",
+      "direction": "phone-to-mac",
+      "seq": 13,
+      "type": 13,
+      "plaintext": "{}",
+      "nonce": "00000001000000000000000d",
+      "frame": "0d0000000d04f6aac69f4a286244532c27b69ea6fbfc69",
+      "signal": "valid"
+    },
+    {
+      "name": "lock-state sealed phone to Mac: it authenticates, but the type is not allowed in this direction",
+      "direction": "phone-to-mac",
+      "seq": 14,
+      "type": 12,
+      "plaintext": "{\"l\":true}",
+      "nonce": "00000001000000000000000e",
+      "frame": "0c0000000e8d6428b6fc39ea6e54ce62a269467f0552dd8673836cfe5b3d78",
+      "signal": "wrong-direction"
+    },
+    {
+      "name": "lock sealed Mac to phone: it authenticates, but the type is not allowed in this direction",
+      "direction": "mac-to-phone",
+      "seq": 19,
+      "type": 13,
+      "plaintext": "{}",
+      "nonce": "000000020000000000000013",
+      "frame": "0d00000013ea8e1b99ad8abebcf3f069cba066487e89db",
+      "signal": "wrong-direction"
+    },
+    {
+      "name": "lock-state whose state is not a boolean",
+      "direction": "mac-to-phone",
+      "seq": 20,
+      "type": 12,
+      "plaintext": "{\"l\":\"true\"}",
+      "nonce": "000000020000000000000014",
+      "frame": "0c00000014013796ecc34467710400ea01a1a364500f006f92070d78941e64d4c0",
+      "signal": "invalid"
+    }
+  ],
+  "rejections": [
+    {
+      "name": "a flipped bit in the tag",
+      "direction": "phone-to-mac",
+      "accepted": [],
+      "frame": "010000000065af7edd13060266d5ff2198d7f3b6ebbd5ead7a96d85f37b420004ea3086eae9449682ef13d5328",
+      "expect": "fail",
+      "reason": "authentication"
+    },
+    {
+      "name": "a flipped bit in the ciphertext",
+      "direction": "phone-to-mac",
+      "accepted": [],
+      "frame": "0100000000e5af7edd13060266d5ff2198d7f3b6ebbd5ead7a96d85f37b420004ea3086eae9449682ef13d5329",
+      "expect": "fail",
+      "reason": "authentication"
+    },
+    {
+      "name": "the type byte changed (it is the AAD)",
+      "direction": "phone-to-mac",
+      "accepted": [],
+      "frame": "020000000065af7edd13060266d5ff2198d7f3b6ebbd5ead7a96d85f37b420004ea3086eae9449682ef13d5329",
+      "expect": "fail",
+      "reason": "authentication"
+    },
+    {
+      "name": "the seq changed (it is part of the nonce)",
+      "direction": "phone-to-mac",
+      "accepted": [],
+      "frame": "010000000765af7edd13060266d5ff2198d7f3b6ebbd5ead7a96d85f37b420004ea3086eae9449682ef13d5329",
+      "expect": "fail",
+      "reason": "authentication"
+    },
+    {
+      "name": "opened with the other direction's nonce",
+      "direction": "mac-to-phone",
+      "accepted": [],
+      "frame": "010000000065af7edd13060266d5ff2198d7f3b6ebbd5ead7a96d85f37b420004ea3086eae9449682ef13d5329",
+      "expect": "fail",
+      "reason": "authentication"
+    },
+    {
+      "name": "a replay of the highest accepted seq",
+      "direction": "phone-to-mac",
+      "accepted": [
+        1
+      ],
+      "frame": "0200000001815c37cb6cd8fd3c989dba2899241d9abc0a47d4ab8398989f8d6a74ddb1551fbf38f0586e86c55e",
+      "expect": "fail",
+      "reason": "replay"
+    },
+    {
+      "name": "a seq 64 below the highest accepted one is below the window",
+      "direction": "phone-to-mac",
+      "accepted": [
+        65
+      ],
+      "frame": "0200000001815c37cb6cd8fd3c989dba2899241d9abc0a47d4ab8398989f8d6a74ddb1551fbf38f0586e86c55e",
+      "expect": "fail",
+      "reason": "replay"
+    },
+    {
+      "name": "a replay inside the window, below the highest accepted seq",
+      "direction": "phone-to-mac",
+      "accepted": [
+        1,
+        5
+      ],
+      "frame": "0200000001815c37cb6cd8fd3c989dba2899241d9abc0a47d4ab8398989f8d6a74ddb1551fbf38f0586e86c55e",
+      "expect": "fail",
+      "reason": "replay"
+    },
+    {
+      "name": "a replayed seq and a bad tag: seq is checked before the AEAD",
+      "direction": "phone-to-mac",
+      "accepted": [
+        1
+      ],
+      "frame": "0200000001815c37cb6cd8fd3c989dba2899241d9abc0a47d4ab8398989f8d6a74ddb1551fbf38f0586e86c55f",
+      "expect": "fail",
+      "reason": "replay"
+    },
+    {
+      "name": "shorter than header and tag",
+      "direction": "phone-to-mac",
+      "accepted": [],
+      "frame": "010000000065af7edd13060266d5ff2198d7f3b6",
+      "expect": "fail",
+      "reason": "malformed"
+    },
+    {
+      "name": "longer than 180 bytes",
+      "direction": "phone-to-mac",
+      "accepted": [],
+      "frame": "010000000065af7edd13060266d5ff2198d7f3b6ebbd5ead7a96d85f37b420004ea3086eae9449682ef13d532900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "expect": "fail",
+      "reason": "malformed"
+    }
+  ],
+  "replayWindow": {
+    "size": 64,
+    "cases": [
+      {
+        "name": "in order",
+        "offered": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "expect": [
+          "accept",
+          "accept",
+          "accept",
+          "accept"
+        ]
+      },
+      {
+        "name": "the first frame need not be seq 0",
+        "offered": [
+          5,
+          0,
+          6
+        ],
+        "expect": [
+          "accept",
+          "accept",
+          "accept"
+        ]
+      },
+      {
+        "name": "reordered inside the window",
+        "offered": [
+          0,
+          2,
+          1,
+          4,
+          3
+        ],
+        "expect": [
+          "accept",
+          "accept",
+          "accept",
+          "accept",
+          "accept"
+        ]
+      },
+      {
+        "name": "a duplicate of the highest",
+        "offered": [
+          0,
+          1,
+          1
+        ],
+        "expect": [
+          "accept",
+          "accept",
+          "replay"
+        ]
+      },
+      {
+        "name": "a duplicate inside the window",
+        "offered": [
+          0,
+          1,
+          2,
+          3,
+          1
+        ],
+        "expect": [
+          "accept",
+          "accept",
+          "accept",
+          "accept",
+          "replay"
+        ]
+      },
+      {
+        "name": "the oldest seq the window still holds",
+        "offered": [
+          63,
+          0,
+          0
+        ],
+        "expect": [
+          "accept",
+          "accept",
+          "replay"
+        ]
+      },
+      {
+        "name": "one below the window",
+        "offered": [
+          64,
+          0
+        ],
+        "expect": [
+          "accept",
+          "replay"
+        ]
+      },
+      {
+        "name": "below the window after a slide",
+        "offered": [
+          10,
+          100,
+          36,
+          37,
+          37
+        ],
+        "expect": [
+          "accept",
+          "accept",
+          "replay",
+          "accept",
+          "replay"
+        ]
+      },
+      {
+        "name": "a far jump forgets everything behind the window",
+        "offered": [
+          0,
+          1,
+          1000,
+          999,
+          937,
+          936,
+          1
+        ],
+        "expect": [
+          "accept",
+          "accept",
+          "accept",
+          "accept",
+          "accept",
+          "replay",
+          "replay"
+        ]
+      },
+      {
+        "name": "a gap of 64 left by restarts",
+        "offered": [
+          0,
+          1,
+          64,
+          128,
+          2,
+          65,
+          63
+        ],
+        "expect": [
+          "accept",
+          "accept",
+          "accept",
+          "accept",
+          "replay",
+          "accept",
+          "replay"
+        ]
+      },
+      {
+        "name": "the last usable seq",
+        "offered": [
+          4294967294,
+          4294967295,
+          4294967295,
+          4294967293
+        ],
+        "expect": [
+          "accept",
+          "accept",
+          "replay",
+          "accept"
+        ]
+      }
+    ]
+  }
+}

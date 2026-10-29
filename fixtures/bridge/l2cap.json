@@ -1,0 +1,248 @@
+{
+  "label": "app.cue.bridge/l2cap/v1",
+  "handshakeKeyBytes": 32,
+  "maxPlaintextBytes": 16384,
+  "minCiphertextBytes": 17,
+  "maxCiphertextBytes": 16400,
+  "timeoutMs": 15000,
+  "derivation": [
+    {
+      "name": "RFC 7748 §6.1 keys (phone = Bob, Mac = Alice) under the K_ble of the first pairing case",
+      "kBle": "988ac48f8611920e955e0f7c697c3972425d4d21a4f06e4a02ecde41b4259b22",
+      "phonePrivateKey": "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb",
+      "phonePublicKey": "de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "macPrivateKey": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+      "macPublicKey": "8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a",
+      "expect": "keys",
+      "sharedSecret": "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742",
+      "salt": "3d707978fbf0c9958a0c66d153e5d174192696a9f3fe3e2174488808e5fd8d63",
+      "okm": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1bba836a7858af8657ae85e513a0cc77c0c239f1a3570bd869af0ff53420510404",
+      "phoneToMacKey": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+      "macToPhoneKey": "ba836a7858af8657ae85e513a0cc77c0c239f1a3570bd869af0ff53420510404"
+    },
+    {
+      "name": "the same key pairs with the roles swapped (phone = Alice, Mac = Bob): the salt orders the keys by role",
+      "kBle": "988ac48f8611920e955e0f7c697c3972425d4d21a4f06e4a02ecde41b4259b22",
+      "phonePrivateKey": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+      "phonePublicKey": "8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a",
+      "macPrivateKey": "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb",
+      "macPublicKey": "de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "expect": "keys",
+      "sharedSecret": "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742",
+      "salt": "28d60b2f20b68d39145fc1f17e48a1e5f81c8c66332afd525349a4ecc83049d1",
+      "okm": "9297d5f7fdf9fa12db185546284aff3524e1beba4445ee2ec343a20ac32c88c210e42539a0d80d509701ca8a7666881856d69730e85b69c87cd64a0753c89019",
+      "phoneToMacKey": "9297d5f7fdf9fa12db185546284aff3524e1beba4445ee2ec343a20ac32c88c2",
+      "macToPhoneKey": "10e42539a0d80d509701ca8a7666881856d69730e85b69c87cd64a0753c89019"
+    },
+    {
+      "name": "the first case's key pairs under the K_ble of the third pairing case: the pairing is in every key",
+      "kBle": "e4e23ac0f5f8db790d0f8512e952e680dd6ecf7e74b6840ba413b63c7c4fd8ce",
+      "phonePrivateKey": "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb",
+      "phonePublicKey": "de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "macPrivateKey": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+      "macPublicKey": "8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a",
+      "expect": "keys",
+      "sharedSecret": "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742",
+      "salt": "76a029d60748b5bd08e3a898913a6d6e3fa916d515f73fa5aa9207e5d626c0d3",
+      "okm": "e23c65ddd24df161bcf5b4ce1f4363bbac42ce133314a5d9c1bdb1fba91860863f230fba785243015ba85fca8629ddfde9cd27670fab3d3c653ee189837dcd1a",
+      "phoneToMacKey": "e23c65ddd24df161bcf5b4ce1f4363bbac42ce133314a5d9c1bdb1fba9186086",
+      "macToPhoneKey": "3f230fba785243015ba85fca8629ddfde9cd27670fab3d3c653ee189837dcd1a"
+    },
+    {
+      "name": "the Mac's key is the low-order point u = 0: the phone aborts",
+      "kBle": "988ac48f8611920e955e0f7c697c3972425d4d21a4f06e4a02ecde41b4259b22",
+      "phonePrivateKey": "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb",
+      "phonePublicKey": "de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "macPublicKey": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expect": "zero-shared-secret"
+    }
+  ],
+  "records": {
+    "seals": [
+      {
+        "name": "counter 0, the smallest plaintext (one byte)",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 0,
+        "nonce": "000000000000000000000000",
+        "plaintext": "00",
+        "record": "001117116bbb27f904f2329f223857c4ba9842"
+      },
+      {
+        "name": "counter 1, phone to Mac",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 1,
+        "nonce": "000000000000000000000001",
+        "plaintext": "4375653a20616e204c32434150207265636f7264",
+        "record": "0024f925f32f1774a4fb11c89ebd8e20d062e440f432b525715420910076267a2942bc5cc84b"
+      },
+      {
+        "name": "counter 1, Mac to phone: the same plaintext under the other key",
+        "key": "ba836a7858af8657ae85e513a0cc77c0c239f1a3570bd869af0ff53420510404",
+        "counter": 1,
+        "nonce": "000000000000000000000001",
+        "plaintext": "4375653a20616e204c32434150207265636f7264",
+        "record": "0024f558479869613ec7ff1f13a62910df5079a3eb2cc77d3bed58bf0ab2b5570b4185e7da27"
+      },
+      {
+        "name": "counter 2^32 + 5: the counter fills all eight bytes of the nonce's tail",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 4294967301,
+        "nonce": "000000000000000100000005",
+        "plaintext": "4375653a20616e204c32434150207265636f7264",
+        "record": "0024220978b4655b50a3d0ab1a3a8584145fd6ef5f091f4a41dac861f291a33d87c1172a6936"
+      },
+      {
+        "name": "counter 7, the largest plaintext (16384 bytes, byte i = i mod 256)",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 7,
+        "nonce": "000000000000000000000007",
+        "plaintextPattern": "i mod 256",
+        "plaintextBytes": 16384,
+        "recordBytes": 16402,
+        "recordHead": "401015fc65c491f6f81219eb2e384fc87bb2",
+        "tag": "50c42de0b4129baf3caa9491831314ec",
+        "recordSha256": "9a7d92ed0f0efbb7a1d2023bf1728ca65bb7ecc3a0fd564ad5a4f36ebbfcbc59"
+      }
+    ],
+    "failures": [
+      {
+        "name": "a flipped tag bit",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 1,
+        "stream": "0024f925f32f1774a4fb11c89ebd8e20d062e440f432b525715420910076267a2942bc5cc84a",
+        "expect": "fail",
+        "reason": "authentication"
+      },
+      {
+        "name": "a flipped ciphertext bit",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 1,
+        "stream": "00247925f32f1774a4fb11c89ebd8e20d062e440f432b525715420910076267a2942bc5cc84b",
+        "expect": "fail",
+        "reason": "authentication"
+      },
+      {
+        "name": "the right record opened at the wrong counter",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 2,
+        "stream": "0024f925f32f1774a4fb11c89ebd8e20d062e440f432b525715420910076267a2942bc5cc84b",
+        "expect": "fail",
+        "reason": "authentication"
+      },
+      {
+        "name": "the right record opened with the other direction's key",
+        "key": "ba836a7858af8657ae85e513a0cc77c0c239f1a3570bd869af0ff53420510404",
+        "counter": 1,
+        "stream": "0024f925f32f1774a4fb11c89ebd8e20d062e440f432b525715420910076267a2942bc5cc84b",
+        "expect": "fail",
+        "reason": "authentication"
+      },
+      {
+        "name": "a ciphertext of 16 bytes, a bare tag with no plaintext",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 1,
+        "stream": "0010b525715420910076267a2942bc5cc84b",
+        "expect": "fail",
+        "reason": "malformed"
+      },
+      {
+        "name": "a ciphertext of 0 bytes",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 1,
+        "stream": "0000",
+        "expect": "fail",
+        "reason": "malformed"
+      },
+      {
+        "name": "a declared ciphertext of 16401 bytes",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 1,
+        "stream": "4011",
+        "zeroFill": 16401,
+        "expect": "fail",
+        "reason": "malformed"
+      },
+      {
+        "name": "the stream ends inside the length",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 1,
+        "stream": "00",
+        "expect": "fail",
+        "reason": "malformed"
+      },
+      {
+        "name": "the stream ends inside the ciphertext",
+        "key": "b536e0c77bece244abc4e0da5e96c6ae3d3f0b7217bae23c883da624ac310c1b",
+        "counter": 1,
+        "stream": "0024f925f32f1774a4fb11c89ebd8e20d062e440f432b525715420910076267a2942bc5cc8",
+        "expect": "fail",
+        "reason": "malformed"
+      }
+    ]
+  },
+  "transcript": {
+    "name": "a session opened over L2CAP: hello both ways, a frame split across two records, bye",
+    "kBle": "988ac48f8611920e955e0f7c697c3972425d4d21a4f06e4a02ecde41b4259b22",
+    "phonePrivateKey": "f6faba4a3758389abca8caf05f3b05fd246997d89d803470482e0299bae005ad",
+    "phonePublicKey": "36417084c5b1d1624d2d88310285dea3b9a4720c3804cb53218c96b9ef67e94c",
+    "macPrivateKey": "315e29d2c34d5e41adca3b1d510b8f1ddb97aa6bb9efb3de97a00b26c12b6e33",
+    "macPublicKey": "7545833749e2dc38c76194165c1f7e9d529e07f3d760525897b8c75317e08427",
+    "sharedSecret": "6fd3eee13fbc0954a107d36913b67fc4cdc3fbf60dd91eecbfe32f6b17931c70",
+    "salt": "08e0025345638d64340f376761026210ccf879d63d0ee533ec44d2d0e849c2d7",
+    "phoneToMacKey": "ddd0ca2f477dbadddd34977cccee5727070e2c5336cdb28c517388a3788986e7",
+    "macToPhoneKey": "08155fce5a4bbcc6166173d6ff7ece4c18090eb00dfc750b7f21aca275d81781",
+    "phoneWrites": [
+      {
+        "what": "handshake: the phone's ephemeral public key",
+        "bytes": "36417084c5b1d1624d2d88310285dea3b9a4720c3804cb53218c96b9ef67e94c"
+      },
+      {
+        "what": "record 0: the hello frame",
+        "counter": 0,
+        "plaintext": "000000167b2274797065223a2268656c6c6f222c2276223a317d",
+        "bytes": "002aa85a46d5d3d8d66329041f2b0a83288d24fce1721de4b7ae07b2ebca5ad02ba7f74d1bde7b612da9ca0b"
+      },
+      {
+        "what": "record 1: the first 10 bytes of the active-set frame",
+        "counter": 1,
+        "plaintext": "000000287b2274797065",
+        "bytes": "001a88aacb0a1152be6e5675d44bc49b929f641d3573f44df77838bc"
+      },
+      {
+        "what": "record 2: the rest of the active-set frame, then a whole bye frame",
+        "counter": 2,
+        "plaintext": "223a226163746976652d736574222c226e6f74696669636174696f6e73223a5b5d7d0000000e7b2274797065223a22627965227d",
+        "bytes": "00443577dad6b3bda9bb0f284263242fc8d9c886de7e696812af65c0b3751925965f8dea2dca94249c1a9967aad20033f7865589e89c8847caff40703e40195e9252c5397958"
+      }
+    ],
+    "macWrites": [
+      {
+        "what": "handshake: the Mac's ephemeral public key",
+        "bytes": "7545833749e2dc38c76194165c1f7e9d529e07f3d760525897b8c75317e08427"
+      },
+      {
+        "what": "record 0: the hello frame",
+        "counter": 0,
+        "plaintext": "000000167b2274797065223a2268656c6c6f222c2276223a317d",
+        "bytes": "002a35fcfc385b3c21d9206a3f2884186538c437bfdde01f6e652158f4d591516d1c58c25a020e3264ba2494"
+      },
+      {
+        "what": "record 1: the sync-request frame",
+        "counter": 1,
+        "plaintext": "000000177b2274797065223a2273796e632d72657175657374227d",
+        "bytes": "002badf78474521a2a2e7c833185ef2bd4b85906e2b9b3a2e3471ffdb69d2c3a218f4ea8573eb1f98c80fcaabe"
+      }
+    ],
+    "phoneStream": "36417084c5b1d1624d2d88310285dea3b9a4720c3804cb53218c96b9ef67e94c002aa85a46d5d3d8d66329041f2b0a83288d24fce1721de4b7ae07b2ebca5ad02ba7f74d1bde7b612da9ca0b001a88aacb0a1152be6e5675d44bc49b929f641d3573f44df77838bc00443577dad6b3bda9bb0f284263242fc8d9c886de7e696812af65c0b3751925965f8dea2dca94249c1a9967aad20033f7865589e89c8847caff40703e40195e9252c5397958",
+    "macStream": "7545833749e2dc38c76194165c1f7e9d529e07f3d760525897b8c75317e08427002a35fcfc385b3c21d9206a3f2884186538c437bfdde01f6e652158f4d591516d1c58c25a020e3264ba2494002badf78474521a2a2e7c833185ef2bd4b85906e2b9b3a2e3471ffdb69d2c3a218f4ea8573eb1f98c80fcaabe",
+    "phoneBodies": [
+      "{\"type\":\"hello\",\"v\":1}",
+      "{\"type\":\"active-set\",\"notifications\":[]}",
+      "{\"type\":\"bye\"}"
+    ],
+    "macBodies": [
+      "{\"type\":\"hello\",\"v\":1}",
+      "{\"type\":\"sync-request\"}"
+    ]
+  }
+}
