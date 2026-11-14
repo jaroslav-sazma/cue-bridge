@@ -11,9 +11,9 @@ phone's half and points here for the Mac's own. This file repeats neither.
 
 | What | Where | Protection | Removed |
 |---|---|---|---|
-| TLS identity: an EC P-256 private key and its self-signed certificate | login keychain: a key tagged `app.cue.bridge.identity`, and the certificate as the generic password `identity-certificate` of service `app.cue.bridge` | keychain ACL that trusts the creating code | never; a new pairing reuses it |
-| Pairing: the phone's certificate fingerprint, `K_ble`, and the hardware UUID of the Mac it was made on | login keychain, generic passwords `peer-pin`, `k-ble` and `pairing-host` of service `app.cue.bridge` | keychain ACL that trusts the creating code | **Unpair**; replaced by a new pairing |
-| Sequence state: the bound of the reserved outgoing numbers and the incoming replay window | `~/Library/Application Support/Cue Bridge/Sequence/state` | directory 0700 and excluded from Time Machine, file 0600; magic, SHA-256 checksum, and a tag hashed from the `K_ble` it counts for | **Unpair**; replaced by a new pairing |
+| TLS identity: an EC P-256 private key and its self-signed certificate | login keychain: a key tagged `app.cue.bridge.identity`, and the certificate as the generic password `identity-certificate` of service `app.cue.bridge` | keychain ACL that trusts the creating code; every query names the login keychain, never the default keychain or the search list | never; a new pairing reuses it |
+| Pairing: the phone's certificate fingerprint, `K_ble`, and the hardware UUID of the Mac it was made on | login keychain, generic passwords `peer-pin`, `k-ble` and `pairing-host` of service `app.cue.bridge` | keychain ACL that trusts the creating code; every query names the login keychain, never the default keychain or the search list | **Unpair**; replaced by a new pairing |
+| Sequence state: the bound of the reserved outgoing numbers and the incoming replay window | `~/Library/Application Support/Cue Bridge/Sequence/state` | directory 0700 and excluded from Time Machine, file 0600; magic, SHA-256 checksum, and a tag hashed from the `K_ble` it counts for; written to a temporary file, renamed over the old one, and flushed to the drive together with its directory | **Unpair**; replaced by a new pairing |
 | Mirrored notifications: app label, title, text, time, the phone's notification key and package | Notification Center, as the app's own notifications; the mirror's state is their `userInfo` | what macOS grants other apps over Notification Center | closed by the user or the phone; all of them at **Unpair** |
 | App icons of mirrored notifications | `~/Library/Caches/app.cue.bridge/icons/<sha256>.png`, and a copy per notification handed to Notification Center from the temporary directory | directory 0700; a name is the hash of the bytes, checked on arrival | **Unpair** |
 | Only in Release builds, which are signed with the communication entitlement: per mirrored notification an incoming message interaction — the app's package, its label and the notification's title as the sender's name, its icon, the thread identifier; never the text | macOS's interaction store for the app (Siri and Suggestions), donated through Intents | what macOS grants over its donated interactions | **Unpair** |
@@ -33,14 +33,18 @@ the same counters.
 
 ## Keychain and signing
 
-The keys live in the file-based login keychain. The data protection keychain needs a restricted
-entitlement that an ad-hoc signature cannot carry, and Debug builds, which share the items, stay ad
-hoc. Each item's ACL trusts the code the user let in. A team-signed build is let in by its
-designated requirement, which a rebuild keeps: for the distributed build the identifier
-`app.cue.bridge` under a Developer ID certificate of the team `ZMAK33FWYB`, for the owner's local
-Release build the same identifier under the owner's Apple Development certificate. The two differ,
-so each asks once. A Debug build is let in by its code hash, so the first launch after every Debug
-rebuild asks once per item. Any other program asking for the items gets the same prompt.
+The keys live in the file-based login keychain. Every read, write and delete names that keychain —
+opened at `~/Library/Keychains/login.keychain-db`, with the home taken from the user's account
+record — never the default keychain or the search list, both of which any same-user process can
+repoint; when the login keychain cannot be opened, the operation fails and is tried again on the
+next use, with no fallback. The data protection keychain needs a restricted entitlement that an
+ad-hoc signature cannot carry, and Debug builds, which share the items, stay ad hoc. Each item's
+ACL trusts the code the user let in. A team-signed build is let in by its designated requirement,
+which a rebuild keeps: for the distributed build the identifier `app.cue.bridge` under a Developer
+ID certificate of the team `ZMAK33FWYB`, for the owner's local Release build the same identifier
+under the owner's Apple Development certificate. The two differ, so each asks once. A Debug build
+is let in by its code hash, so the first launch after every Debug rebuild asks once per item. Any
+other program asking for the items gets the same prompt.
 
 The build for others is exported from a Release archive with the team's Developer ID certificate, a
 secure timestamp and a Developer ID provisioning profile, then notarized and stapled, and so is the
@@ -89,9 +93,11 @@ phone's own identity is new with every pairing, so the copy opens no session.
   bytes. At most eight connections may be in their handshake, three from one address; a new one
   closes the oldest.
 - **Bluetooth.** Frames are sealed under `K_ble`, with the sequence numbers kept in the file above
-  and checked against a 64-entry window. A GATT subscriber counts as the phone only once a frame it
-  wrote itself has been accepted; until then it gets nothing but the sealed summon. An L2CAP channel
-  authenticates by `K_ble` and has two slots of its own for channels in their handshake.
+  and checked against a 64-entry window. A frame is acted on only once its place in the window is
+  saved; a frame whose save fails is dropped, so nothing is ever done twice for one number. A GATT
+  subscriber counts as the phone only once a frame it wrote itself has been accepted; until then it
+  gets nothing but the sealed summon. An L2CAP channel authenticates by `K_ble` and has two slots
+  of its own for channels in their handshake.
 - **Input.** The first frame on a connection must be `hello`: any other, an unknown type included,
   closes the connection. After `hello` an unknown type is ignored, so a newer phone can add
   messages; a malformed frame closes the connection.
@@ -99,7 +105,8 @@ phone's own identity is new with every pairing, so the copy opens no session.
   (it is until the user turns it off), the phone's last `hello` took clips, a way to the phone is up
   and the Mac is awake and unlocked. A copy made while **Send Clipboard to Phone** was off stays on
   the Mac when the switch is turned back on. Clips marked concealed, transient or auto-generated are
-  skipped before their text is read.
+  skipped before their text is read, and a clip whose pasteboard changed under the read — the change
+  count or those markers moved — is discarded rather than sent.
 - **Screen lock.** The phone can ask the Mac to lock its screen, never to unlock it, and learns
   whether the screen is locked: when that changes, when its subscription is confirmed, on every
   session and in answer to every request to lock. The Mac locks through `SACLockScreenImmediate`,
@@ -154,11 +161,13 @@ notifications through it. Release builds compile the server out.
   with an injected library, and read `K_ble` and the identity key from memory; `bridgectl` hands it
   the mirrored notifications. Debug builds are for development.
 - **Code running as the same user, in Release builds.** It cannot read the app's memory, and the
-  keychain asks the user before it hands the keys to anything but the builds the user let in. It
-  can read and write the user's files: the icons, the defaults — among them the click actions, so it
-  can pick what a click on a notification opens — and the sequence file, whose tag it cannot forge
-  without `K_ble` but whose older copy it can put back. The Mac would then spend sequence numbers
-  again under the same key — nonce reuse — and accept old frames once more, until the next pairing.
+  keychain asks the user before it hands the keys to anything but the builds the user let in;
+  repointing the default keychain or the search list redirects nothing either, since every query
+  names the login keychain. It can read and write the user's files: the icons, the defaults — among
+  them the click actions, so it can pick what a click on a notification opens — and the sequence
+  file, whose tag it cannot forge without `K_ble` but whose older copy it can put back. The Mac
+  would then spend sequence numbers again under the same key — nonce reuse — and accept old frames
+  once more, until the next pairing.
 - **Theft of what the Mac stores.** The phone treats the paired Mac as the user's own device, so a
   stolen secret acts as that Mac:
 

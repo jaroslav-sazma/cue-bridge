@@ -229,8 +229,13 @@ final class ClipboardPublisher {
             log.info("clipboard debt forgotten: older than \(ClipboardDebt.lifetime / .seconds(60), format: .fixed(precision: 0)) min")
             return
         }
-        let types = Set((pasteboard.types ?? []).map(\.rawValue))
-        let clip = PasteboardClip(types: types) { pasteboard.string(forType: .string) }
+        guard let clip = PasteboardClip.read(
+            changeCount: count, current: { pasteboard.changeCount },
+            types: { Set((pasteboard.types ?? []).map(\.rawValue)) }, text: { pasteboard.string(forType: .string) }
+        ) else {
+            log.info("clipboard not sent: the pasteboard changed while it was read")
+            return
+        }
         let decision: ClipDecision
         do {
             decision = try echo.decide(clip, at: now, ageMs: owed?.ageMs(at: now))

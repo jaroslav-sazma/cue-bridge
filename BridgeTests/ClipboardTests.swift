@@ -19,6 +19,36 @@ private struct Script {
     var last: [ClipboardPublisherMachine.Effect] { effects.last ?? [] }
 }
 
+// NSPasteboard as the publisher reads it: the count moves with every new clip, and another app may
+// write while the text is being read.
+private final class FakePasteboard {
+    var changeCount = 1
+    var types: Set<String>
+    var text: String?
+    var whileTextIsRead: (() -> Void)?
+    private(set) var textReads = 0
+
+    init(types: Set<String>, text: String?) {
+        self.types = types
+        self.text = text
+    }
+
+    func replace(types: Set<String>, text: String?) {
+        changeCount += 1
+        self.types = types
+        self.text = text
+    }
+
+    func read(expecting count: Int) -> PasteboardClip? {
+        PasteboardClip.read(changeCount: count, current: { changeCount }, types: { types }) {
+            textReads += 1
+            whileTextIsRead?()
+            whileTextIsRead = nil
+            return text
+        }
+    }
+}
+
 @Suite("Clipboard")
 struct ClipboardTests {
     @Test("clipboard-set encodes announce only when true and reads an absent one as false")
@@ -100,6 +130,32 @@ struct ClipboardTests {
         #expect(try echo.decide(text(""), at: start) == .skip(.empty))
         #expect(ClipSkip.tooLarge.rawValue == "too-large")
         #expect(ClipSkip.notText.rawValue == "not-text")
+    }
+
+    @Test("a clip replaced while it was read is discarded, and the next pass judges the new one alone")
+    func racedRead() throws {
+        let pasteboard = FakePasteboard(types: ["public.utf8-plain-text"], text: "plain")
+        #expect(pasteboard.read(expecting: 1) == text("plain"))
+
+        pasteboard.whileTextIsRead = {
+            pasteboard.replace(types: ["public.utf8-plain-text", ClipboardLimits.concealedType], text: "hunter2")
+        }
+        #expect(pasteboard.read(expecting: 1) == nil, "concealed text read under the plain clip's markers")
+        let next = try #require(pasteboard.read(expecting: pasteboard.changeCount))
+        #expect(next.concealed && next.text == nil)
+        #expect(try ClipboardEcho().decide(next, at: start) == .skip(.concealed))
+
+        let marked = FakePasteboard(types: ["public.utf8-plain-text"], text: "token")
+        marked.whileTextIsRead = { marked.types.insert(ClipboardLimits.transientType) }
+        #expect(marked.read(expecting: 1) == nil, "a marker added without a new count")
+    }
+
+    @Test("a marked clip is judged without its text ever being read")
+    func markedReadsNoText() {
+        let pasteboard = FakePasteboard(types: [ClipboardLimits.concealedType, "public.utf8-plain-text"], text: "secret")
+        let clip = pasteboard.read(expecting: 1)
+        #expect(clip == PasteboardClip(concealed: true, text: nil))
+        #expect(pasteboard.textReads == 0)
     }
 
     @Test("the limit is 102,400 UTF-8 bytes, not characters")

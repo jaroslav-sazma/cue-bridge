@@ -736,13 +736,14 @@ actor BridgeServer {
             opened = accepted
             interpretation = interpreted
         }
-        let accepted = book.accepted(window)
-        sequences = book
         do {
-            try sequenceFile.save(accepted, durable: false)
+            try book.accept(window) { try sequenceFile.save($0, durable: false) }
         } catch {
             report(error, "Saving the sequence state")
+            protocolLog.info("recv signal seq=\(opened.seq) dropped\(via, privacy: .public): its acceptance could not be saved")
+            return
         }
+        sequences = book
         if carrier == .gatt {
             status.lastGattReceived = BridgeStatus.GattTraffic(type: Signal.name(of: opened.type), at: .now)
         }

@@ -81,14 +81,35 @@ struct SequenceStateTests {
     }
 
     @Test("an accepted frame's window is what gets persisted")
-    func incoming() {
+    func incoming() throws {
         var book = SequenceBook(SequenceState(fresh: kBle))
         var window = book.window
         window.record(5)
         window.record(3)
-        let persisted = book.accepted(window)
-        #expect(persisted.incoming == window && book.window == window)
-        #expect(!persisted.incoming.permits(3) && persisted.incoming.permits(4))
+        var persisted: SequenceState?
+        try book.accept(window) { persisted = $0 }
+        #expect(persisted?.incoming == window && book.window == window)
+        #expect(persisted?.incoming.permits(3) == false && persisted?.incoming.permits(4) == true)
+    }
+
+    @Test("a frame whose window could not be saved leaves the window where it was")
+    func failedAcceptance() throws {
+        let file = temporaryFile()
+        defer { try? FileManager.default.removeItem(at: file.url.deletingLastPathComponent().deletingLastPathComponent()) }
+        var book = SequenceBook(SequenceState(fresh: kBle))
+        var first = book.window
+        first.record(0)
+        try book.accept(first) { try file.save($0, durable: false) }
+
+        var second = book.window
+        second.record(1)
+        #expect(throws: POSIXError.self) {
+            try book.accept(second) { _ in throw POSIXError(.ENOSPC) }
+        }
+        #expect(book.window == first, "the frame is dropped, so it was never seen")
+        #expect(book.window.permits(1))
+        #expect(try file.load().incoming == first, "a restart finds the same window the book holds")
+        #expect(SequenceBook(try file.load()) == book)
     }
 
     @Test("the encoding round-trips and rejects anything malformed")
@@ -175,6 +196,24 @@ struct SequenceFileTests {
             return
         }
         #expect(reason.hasPrefix("unreadable"))
+    }
+
+    @Test("a save that cannot be completed throws and leaves the state on disk as it was")
+    func failedSave() throws {
+        let file = temporaryFile()
+        let directory = file.url.deletingLastPathComponent()
+        defer {
+            chmod(directory.path, 0o700)
+            try? FileManager.default.removeItem(at: directory.deletingLastPathComponent())
+        }
+        var state = SequenceState(fresh: kBle)
+        state.outgoingBound = 64
+        try file.save(state, durable: true)
+        chmod(directory.path, 0o500)
+        var later = state
+        later.outgoingBound = 128
+        #expect(throws: POSIXError.self) { try file.save(later, durable: true) }
+        #expect(try file.load() == state)
     }
 
     @Test("unpairing deletes the file, and deleting nothing is fine")

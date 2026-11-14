@@ -129,10 +129,13 @@ nonisolated struct SequenceBook: Equatable, Sendable {
         next = UInt64(seq) + 1
     }
 
-    // Returns the state to persist.
-    mutating func accepted(_ window: ReplayWindow) -> SequenceState {
-        stored.incoming = window
-        return stored
+    // The window moves only once its state is saved: when the save throws, the frame must be dropped
+    // unacted, or a restart that finds the old window would accept it again.
+    mutating func accept(_ window: ReplayWindow, saving save: (SequenceState) throws -> Void) throws {
+        var state = stored
+        state.incoming = window
+        try save(state)
+        stored = state
     }
 }
 
@@ -213,6 +216,18 @@ nonisolated struct SequenceFile: Sendable {
             unlink(temporary.path)
             throw POSIXError(failure)
         }
+        if let failure = Self.flush(directory: directory, durable: durable) {
+            throw POSIXError(failure)
+        }
+    }
+
+    // The rename is an entry in the directory: until the directory is flushed too, a power cut can
+    // bring the old file back, and with it a bound already handed out.
+    private static func flush(directory: URL, durable: Bool) -> POSIXErrorCode? {
+        let fd = open(directory.path, O_RDONLY | O_DIRECTORY)
+        guard fd >= 0 else { return POSIXErrorCode(rawValue: errno) ?? .EIO }
+        defer { close(fd) }
+        return flush(fd, durable: durable) ? nil : POSIXErrorCode(rawValue: errno) ?? .EIO
     }
 
     // F_FULLFSYNC fails on file systems that cannot honour it; fsync is the most those can give.
