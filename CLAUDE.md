@@ -81,21 +81,22 @@ notifications, the Keychain items — and where it stands for the name shared by
 xcodebuild -scheme Bridge -configuration Debug -derivedDataPath build build
 xcodebuild -scheme Bridge -configuration Debug -derivedDataPath build test
 ```
-DerivedData stays in `build/` inside the repo. Inside the sandbox xcrun prints
-`couldn't create cache file` warnings; they are harmless, `** BUILD SUCCEEDED **` decides. The
-source folders `Bridge/` (the app), `BridgeProtocol/` (the pure codec and the pure logic — link
-stages, the state-sync diff, doorbell coalescing — compiled into the app and the tests),
-`BridgeTests/` and `bridgectl/` are file-system-synchronized groups: adding a file to one needs no
-`project.pbxproj` edit, a new target does. The `BridgeTests` bundle (Swift Testing) runs without the
-app as host, so only `BridgeProtocol/` is testable; it never binds a port or a socket and never
-touches the keychain. `#expect` cannot take a mutating call: bind the result to a `let` first.
-Launching the built app binds ports and goes through Launch Services, so it is an unsandboxed step
-the user approves, or the tester starts it; never enable local binding in the sandbox settings. The
-app keeps its identity and pairing in the login keychain, whose ACL trusts the signature that was
-let in: a Debug build is signed ad hoc and trusted by its code hash, so the first launch after a
-Debug rebuild may ask once for keychain access and "Always Allow" lets the new build in; a Release
-build is trusted by its team signature, which a rebuild keeps. Debug and Release share the keychain
-items, `~/Library/Application Support/Cue Bridge/` and the icon cache; only the defaults, the system
+DerivedData stays in `build/` inside the repo. Inside the sandbox the Swift macro plugin server
+fails (`swift-plugin-server` "produced malformed response"), so no macro expands and both `build`
+and `test` fail: run xcodebuild with the sandbox off, a step the user approves. The source folders
+`Bridge/` (the app), `BridgeProtocol/` (the pure codec and the pure logic — link stages, the
+state-sync diff, doorbell coalescing — compiled into the app and the tests), `BridgeTests/` and
+`bridgectl/` are file-system-synchronized groups: adding a file to one needs no `project.pbxproj`
+edit, a new target does. The `BridgeTests` bundle (Swift Testing) runs without the app as host, so
+only `BridgeProtocol/` is testable; it never binds a port or a socket and never touches the
+keychain. `#expect` cannot take a mutating call: bind the result to a `let` first. Launching the
+built app binds ports and goes through Launch Services, so it is an unsandboxed step the user
+approves, or the tester starts it; never enable local binding in the sandbox settings. The app keeps
+its identity and pairing in the login keychain, whose ACL trusts the signature that was let in: a
+Debug build is signed ad hoc and trusted by its code hash, so the first launch after a Debug rebuild
+may ask once for keychain access and "Always Allow" lets the new build in; a Release build is
+trusted by its team signature, which a rebuild keeps. Debug and Release share the keychain items,
+`~/Library/Application Support/Cue Bridge/` and the icon cache; only the defaults, the system
 permissions and the login item follow the bundle id. So only one of them runs at a time: a copy
 started while either runs exits at once (`SingleInstance`).
 
